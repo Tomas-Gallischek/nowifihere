@@ -1,0 +1,231 @@
+/* Přepíšeme styly pro kontejner, aby vyhovovaly našemu rozložení */
+.container {
+    display: grid;
+    grid-template-columns: 120px 120px 120px 120px;
+    grid-template-rows: 120px 120px 120px 120px;
+    gap: 5px;
+    /* Odstraníme původní flexbox vlastnosti z base.css pro tento kontejner */
+    justify-content: center; /* Vycentrujeme mřížku na střed */
+    align-items: center; /* Vycentrujeme položky mřížky na střed */
+    width: auto; /* Přizpůsobíme šířku obsahu */
+    margin: 20px auto; /* Přidáme okraje pro lepší vzhled a vycentrování */
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.center {
+    border: 2px solid black;
+    background-color: transparent;
+    grid-column: 2/4;
+    grid-row: 2/4;
+}
+
+.top-left {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.top-right {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.bottom-left {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+.bottom-right {
+    grid-column: 3;
+    grid-row: 4;
+}
+
+.left-top {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.left-bottom {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.right-top {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+.right-bottom {
+    grid-column: 4;
+    grid-row: 3;
+}
+
+.item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.atributy {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 2px;          /* Zmenšíme mezeru mezi řádky a sloupci */
+    column-gap: 2px;   /* Zmenšíme mezeru mezi sloupci */
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.ukazatel-container-energie {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ukazatel-container-kondice {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ukazatel-container-hydratace {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ukazatel-container-sytost {
+    grid-column: 4;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ukazatel-container-kapacita {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ukazatel-container-zatez {
+    grid-column: 3;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.kruhovy-graf {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(red, white 0);
+    margin-bottom: 10px;
+}
+
+.kruhovy-graf::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+}
+
+.kruhovy-graf p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Kontejner (obal) progress baru */
+.progress-bar-container {
+    /* --- Styly pro POZICI --- */
+    position: fixed;   /* Pozice relativní k oknu prohlížeče */
+    top: 20px;         /* Vzdálenost od horního okraje (můžeš upravit) */
+    right: 20px;        /* Vzdálenost od pravého okraje (můžeš upravit) */
+    z-index: 1000;     /* Zajistí, že bude nad většinou ostatních prvků (volitelné, ale doporučené) */
+
+    /* --- Původní styly pro VZHLED --- */
+    width: 200px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    border: 2px solid black;
+    height: 30px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.lvl-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+    position: fixed;   /* Pozice relativní k oknu prohlížeče */
+    top: 12px;         /* Vzdálenost od horního okraje (můžeš upravit) */
+    right: 235px;        /* Vzdálenost od pravého okraje (můžeš upravit) */
+    z-index: 1000;     /* Zajistí, že bude nad většinou ostatních prvků (volitelné, ale doporučené) */
+}
+/* Vnitřní výplň progress baru (samotný postup) - ZŮSTÁVÁ STEJNÉ */
+.progress-bar-fill {
+    height: 100%;
+    background-color: #28a745;
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, .15) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+        transparent 75%, transparent
+    );
+    background-size: 1rem 1rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.6s ease;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Text uvnitř progress baru - ZŮSTÁVÁ STEJNÉ */
+.progress-bar-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Animace proužků (volitelné) - ZŮSTÁVÁ STEJNÉ */
+@keyframes progress-bar-stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+}
+
+.progress-bar-fill.animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}

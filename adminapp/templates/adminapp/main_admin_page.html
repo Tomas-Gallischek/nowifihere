@@ -1,0 +1,34 @@
+{% extends "base_univerzal.html" %}
+{% load static %}
+
+{% block title %}ADMIN PAGE{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "adminapp/main_admin_page.css" %}">
+{% endblock css_files %}
+
+{% block content %}
+<STRONg>1. Kroky</STRONg>
+<STRONg>2. Spánek</STRONg>
+<STRONg>3. 3x (INV-EQP-JÍDLO)</STRONg>
+<strong>4. Aktualizovat DEN</strong>
+<strong>5. Aktualizovat PAMĚT</strong>
+
+
+<div class="seznam">
+    <ul>
+        <li><a href="{% url 'admin:index' %}">Aktualizace dat</a></li>
+        <li><a href="statistiky_avataru">Statistiky avatarů</a></li>
+        <li><a href="detail_hracu">Detail hráčů</a></li>
+        <li><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></li>
+    </ul>
+</div>
+
+<div class="menu">
+    <ul>
+        <li><button onclick="history.back()">ZPĚT</button></li>
+        <li><button><a href="/">DOMŮ</a></button> </li>
+    </ul>
+</div>
+
+{% endblock content %}

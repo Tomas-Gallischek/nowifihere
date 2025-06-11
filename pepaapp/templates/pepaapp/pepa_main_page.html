@@ -1,0 +1,128 @@
+{% extends "base_main_page.html" %}
+{% load static %}
+
+{% block title %}PEPA{% endblock title %}
+
+{% block css_files %} <link rel="stylesheet" href="{% static "pepaapp/pepa_main_page.css" %}"> {% endblock css_files %}
+
+{% block content %}
+<h1><u>PEPA</u></h1>
+<p>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </p>
+<p>Dneska máme den číslo: <strong>{{nasledujici_den}}</strong> </p>
+<h3>Maminka dneska poslala: {{money_income}} Kč</h3>
+<h4>PROGRES: <strong>{{PEPA_FINAL_KROKY}}</strong> / <strong>320</strong> km </h4>
+
+<div class="container">
+    <div class="item top-left">
+        <img src="{% static spacak_img %}" alt="Spacák">
+    </div>
+    <div class="item top-right">
+        <img src="{% static karimatka_img %}" alt="Karimatka">
+    </div>
+    <div class="item left-top">
+        <img src="{% static triko_img %}" alt="Tričko">
+    </div>
+    <div class="item left-bottom">
+        <img src="{% static kalhoty_img %}" alt="Kalhoty">
+    </div>
+    <div class="item center">
+        <img src="{% static "images/pepa-avatar.png" %}" alt="Avatar">
+    </div>
+    <div class="item right-top">
+        <img src="{% static batoh_img %}" alt="Batoh">
+    </div>
+    <div class="item right-bottom">
+        <img src="{% static doplnek_img %}" alt="Doplněk">
+    </div>
+    <div class="item bottom-left">
+        <img src={% static boty_img %} alt="Boty">
+    </div>
+    <div class="item bottom-right">
+        <img src="{% static ponozky_img %}" alt="Ponožky">
+    </div>
+</div>
+
+<div class="atributy">
+    <div class="ukazatel-container-energie">
+        <div class="kruhovy-graf" data-procenta="{{pepa_energie_procenta}}"></div>
+        <p>ENERGIE: {{pepa_energie_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-kondice">
+        <div class="kruhovy-graf" data-procenta="{{kondice_procenta}}"></div>
+        <p>KONDICE: {{kondice_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-hydratace">
+        <div class="kruhovy-graf" data-procenta="{{hydratace_procenta}}"></div>
+        <p>HYDRATACE: {{hydratace_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-sytost">
+        <div class="kruhovy-graf" data-procenta="{{sytost_procenta}}"></div>
+        <p>SYTOST: {{sytost_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-kapacita">
+        <div class="kruhovy-graf" data-procenta="{{volna_kapacita_procenta}}"></div>
+        <p>VOLNÁ KAPACITA: {{volna_kapacita_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-zatez">
+        <div class="kruhovy-graf" data-procenta="{{zatez_procenta}}"></div>
+        <p>ZÁTĚŽ: {{zatez_procenta}} %</p>
+    </div>
+</div>
+<div class="lvl-text">
+    <h1>LVL:{{aktualni_lvl}}</h1>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar-fill" style="width: {{next_lvl_procenta}}%;">
+        <span class="progress-bar-text">{{next_lvl_procenta}}%</span>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(red ${procenta}%, white ${procenta}%)`;
+        });
+    });
+</script>
+<script>
+    // Zde získej nebo nastav skutečnou hodnotu proměnné
+    let next_lvl_procenta = next_lvl_procenta // Příklad: nastavíme 80%
+  
+    // Najdi elementy progress baru a textu
+    let progressBarFill = document.querySelector('.progress-bar-fill');
+    let progressBarText = document.querySelector('.progress-bar-text');
+  
+    // Zkontroluj, jestli elementy existují, a nastav jim hodnoty
+    if (progressBarFill) {
+      // Nastav šířku výplně podle procent
+      progressBarFill.style.width = next_lvl_procenta + '%';
+  
+      // Pokud existuje i element pro text, aktualizuj ho
+      if (progressBarText) {
+        progressBarText.textContent = next_lvl_procenta + '%';
+      }
+    } else {
+      console.error("Element .progress-bar-fill nebyl nalezen!");
+    }
+  </script>
+
+
+<div class="menu">
+    <ul>
+        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+{% endblock content %}
+
+
+

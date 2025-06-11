@@ -1,0 +1,146 @@
+{% extends "base_univerzal.html" %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block css_files %} <link rel="stylesheet" href="{% static "adminapp/statistiky_avataru.css" %}"> {% endblock css_files %}
+
+{% block content %}
+
+
+
+<div class="statistiky-kontejner">
+
+    <div class="pepa">
+        <h1><u>PEPA</u></h1>
+        <h2>
+            ENERGIE:
+            <p></p>            
+            <span class="hodnota">{{pepa_energie}}</span>%
+            <br>
+            KONDICE:
+            <p></p>            
+            <span class="hodnota">{{pepa_kondice}}</span>%
+            <br>
+            HYDRATACE:
+            <p></p>            
+            <span class="hodnota">{{pepa_hydratace}}</span>%
+            <br>
+            SYTOST:
+            <p></p>            
+            <span class="hodnota">{{pepa_sytost}}</span>%
+            <br>
+            VOLNÁ KAPACITA:
+            <p></p>            
+            <span class="hodnota">{{pepa_volna_kapacita}}</span>%
+            <br>
+            ZÁTĚŽ:
+            <p></p>            
+            <span class="hodnota">{{pepa_zatez}}</span>%
+            <br>
+            AKTUÁLNÍ VÁHA:
+            <p></p>            
+            {{pepa_vaha}} Kg
+            <br>
+            UŠLÉ KILOMETRY:
+            <p></p>            
+            {{pepa_km}} Km
+            <br>
+            XP CELKEM:
+            <p></p>            
+            {{pepa_xp}} XP
+        </h2>
+    </div>
+
+    <div class="karel">
+        <h1><u>KAREL</u></h1>
+        <h2>
+            ENERGIE:
+            <p></p>            
+            <span class="hodnota">{{karel_energie}}</span>%
+            <br>
+            KONDICE:
+            <p></p>            
+            <span class="hodnota">{{karel_kondice}}</span>%
+            <br>
+            SYTOST:
+            <p></p>            
+            <span class="hodnota">{{karel_sytost}}</span>%
+            <br>
+            HYDRATACE:
+            <p></p>            
+            <span class="hodnota">{{karel_hydratace}}</span>%
+            <br>
+            ZÁTĚŽ:
+            <p></p>            
+            <span class="hodnota">{{karel_zatez}}</span>%
+            <br>
+            VOLNÁ KAPACITA:
+            <p></p>            
+            <span class="hodnota">{{karel_volna_kapacita}}</span>%
+        </h2>
+    </div>
+
+    <div class="brunhilda">
+        <h1><u>BRUNHILDA</u></h1>
+        <h2>
+            ENERGIE:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_energie}}</span>%
+            <br>
+            KONDICE:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_kondice}}</span>%
+            <br>
+            SYTOST:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_sytost}}</span>%
+            <br>
+            HYDRATACE:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_hydratace}}</span>%
+            <br>
+            ZÁTĚŽ:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_zatez}}</span>%
+            <br>
+            VOLNÁ KAPACITA:
+            <p></p>            
+            <span class="hodnota">{{brunhilda_volna_kapacita}}</span>%
+        </h2>
+    </div>
+
+</div> <div class="menu">
+    <ul>
+        <li><button><a href="javascript:history.back()">ZPĚT</a></button></li>
+        <li><button><a href="/">Zpět na hlavní stranu</a></button></li>
+    </ul>
+</div>
+
+
+<script>
+    // Tento skript se spustí až poté, co se načte celý obsah stránky
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Najdi všechny elementy, které mají naši třídu "hodnota"
+        const hodnotyElementy = document.querySelectorAll('.hodnota');
+        
+        // 2. Projdi každý nalezený element jeden po druhém
+        hodnotyElementy.forEach(function(element) {
+            
+            // 3. Přečti text uvnitř elementu (např. "75") a převeď ho na celé číslo
+            const hodnota = parseInt(element.textContent, 10);
+            
+            // 4. Podle hodnoty čísla přidej elementu správnou CSS třídu
+            if (hodnota <= 30) {
+                element.classList.add('barva-nizka');
+            } else if (hodnota >= 31 && hodnota <= 60) {
+                element.classList.add('barva-stredni');
+            } else if (hodnota >= 61) {
+                element.classList.add('barva-vysoka');
+            }
+        });
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "base_detail_hrace.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block css_files %}{% endblock css_files %}
+
+{% block content %}
+
+
+<div class="seznam">
+    <ul>
+        {% for hrac in vsichni_hraci|dictsortreversed:"celkem_kroku" %}
+            <li>
+                <a href="{% url 'detail_hrace' hrac.id %}">
+                    {{hrac.jmeno}} {{hrac.prijmeni}}
+                </a>                
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="menu">
+    <ul>
+        <li>
+            <button onclick="history.back()">ZPĚT</button>
+        </li>
+    </ul>
+</div>
+
+
+{% endblock content %}
+
+
+
+
+
+
+

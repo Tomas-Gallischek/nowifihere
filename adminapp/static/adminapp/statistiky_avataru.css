@@ -1,0 +1,50 @@
+/*
+ * =========================================
+ * Hlavní layout pro statistiky avatarů
+ * =========================================
+ */
+
+/* Kontejner, který drží všechny tři sloupce */
+.statistiky-kontejner {
+    display: flex; /* Zapne Flexbox. Tím se položky uvnitř automaticky seřadí do řádku. */
+    gap: 20px; /* Vytvoří mezeru 20px mezi jednotlivými sloupci. */
+    margin-bottom: 30px; /* Přidá mezeru pod statistikami, aby nebyly nalepené na menu. */
+}
+
+/* Společný styl pro všechny tři sloupce (Pepa, Karel, Brunhilda) */
+.pepa, .karel, .brunhilda {
+    flex: 1; /* Klíčová vlastnost! Říká, že každý sloupec má zabrat stejný díl dostupného místa. */
+    padding: 20px; /* Vnitřní odsazení, aby text nebyl nalepený na okrajích. */
+    border: 1px solid #cccccc; /* Tenký šedý rámeček pro vizuální oddělení. */
+    border-radius: 8px; /* Lehce zaoblené rohy pro modernější vzhled. */
+    background-color: #f9f9f9; /* Jemná barva pozadí sloupce. */
+}
+
+h2 {
+    /* Zajistí správné zalomení řádků a čitelnost */
+    line-height: 1.6;
+}
+
+/*
+ * =========================================
+ * Styly pro dynamické barvy hodnot
+ * =========================================
+ */
+
+/* Barva pro nízké hodnoty (<= 30) */
+.barva-nizka {
+    color: red;
+    font-weight: bold; /* Zachováme tučné písmo */
+}
+
+/* Barva pro střední hodnoty (31-60) */
+.barva-stredni {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Barva pro vysoké hodnoty (>= 61) */
+.barva-vysoka {
+    color: green;
+    font-weight: bold;
+}

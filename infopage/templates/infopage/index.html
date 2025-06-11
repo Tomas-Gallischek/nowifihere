@@ -1,0 +1,24 @@
+{% extends "base_main_page.html" %}
+{% load static %}
+
+{% block title %}Úvodní STRANA{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "infopage/index.css" %}">
+{% endblock css_files %}
+
+{% block content %}
+
+<div class="seznam">
+    <ul>
+        <li><a href="adminapp">ADMIN</a></li>
+        <li><a href="pepaapp">PEPA</a></li>
+        <li><a href="karelapp">KAREL</a></li>
+        <li><a href="brunhildaapp">BRUNHILDA</a></li>
+    </ul>
+</div>
+
+
+
+
+{% endblock content %}

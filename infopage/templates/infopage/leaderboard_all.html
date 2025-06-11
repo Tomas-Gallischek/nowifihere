@@ -1,0 +1,37 @@
+{% extends "base_leaderboard.html" %}
+
+{% block title %}Žebříček - Všichni{% endblock title %}
+
+{% block css_files %}{% endblock css_files %}
+
+{% block content %}
+
+
+<ol>
+    {% for hrac in vsichni_hraci|dictsortreversed:"celkem_kroku" %}
+        <li>
+            {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} kroků (#tym{{hrac.tym}})
+        </li>
+    {% endfor %}
+</ol>
+
+
+<div class="menu">
+    <ul>
+        <li>
+            <button onclick="history.back()">ZPĚT</button>
+        </li>
+    </ul>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+

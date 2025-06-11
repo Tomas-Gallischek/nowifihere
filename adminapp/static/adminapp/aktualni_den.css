@@ -1,0 +1,45 @@
+form {
+  margin-bottom: 20px; /* Větší mezera pod formulářem */
+  padding: 20px; /* Vnitřní okraje formuláře */
+  border: 3px solid black; /* Výraznější černý rámeček */
+  border-radius: 5px; /* Mírně zaoblené rohy */
+  width: fit-content; /* Přizpůsobí šířku obsahu */
+}
+
+label {
+  display: flex; /* Každý popisek na novém řádku */
+  margin-bottom: 5px; /* Mezera pod popiskem */
+  font-weight: bold; /* Tučné písmo popisku */
+  text-decoration: none;
+  color: white;
+  text-shadow: -1px -1px 0 black,  
+               1px -1px 0 black,  
+              -1px  1px 0 black,  
+               1px  1px 0 black; /* Černé ohraničení textu */
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="number"] {
+  padding: 8px; /* Vnitřní okraje vstupního pole */
+  margin-bottom: 10px; /* Mezera pod vstupním polem */
+  border: 1px solid #ddd; /* Tenká světle šedá linka kolem pole */
+  border-radius: 3px; /* Mírně zaoblené rohy */
+  width: 150px; /* Pevná šířka vstupního pole */
+}
+
+input[type="submit"] {
+border: 2px solid black;
+background-color: green;
+color: white;
+padding: 10px 15px;
+border-radius: 10px;
+cursor: pointer;
+width: 200px;
+transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+input[type="submit"]:hover {
+background-color: darkgreen;
+transform: scale(1.05);
+}

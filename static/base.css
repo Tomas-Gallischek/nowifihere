@@ -1,0 +1,138 @@
+/* Nastavení písma */
+/* Nastavení písma a pozadí */
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 20px;
+  background: linear-gradient(135deg, white 30%, rgb(22, 129, 22) 90%);
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* <-- Hlavní osa je vertikální */
+  align-items: center;    /* <-- Zarovnává horizontálně (na křížové ose) */
+  justify-content: center; /* <-- TOTO PŘIDAT/ODKOMENTOVAT: Zarovnává vertikálně (na hlavní ose) */
+  min-height: 100vh;     /* <-- Zajišťuje, že body má výšku alespoň celé obrazovky */
+  text-align: center;
+}
+/* Zarovnání hlavního obsahu */
+.container {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+/* Styly pro menu */
+.menu {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu li {
+  margin: 10px 0;
+  padding: 5%;
+}
+
+.menu button {
+  border: 2px solid black;
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.menu button a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.menu button:hover {
+  background-color: darkgreen;
+  transform: scale(1.05);
+}
+
+/* Zarovnání textových elementů */
+h1, h2, p {
+  margin: 10px 0;
+}
+
+
+/* Styly pro seznam hráčů */
+ol {
+  padding: 0;
+  margin: 0;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  counter-reset: player-counter;
+}
+
+ol li {
+  padding: 5%;
+  font-size: 18px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  position: relative;
+  list-style-position: inside;
+}
+
+/* Styly pro nečíslovaný seznam hráčů */
+.seznam {
+  width: 80%; /* Nebo jiná šířka, např. max-width: 600px; */
+  margin-left: auto;
+  margin-right: auto;
+  /* Můžeš použít i zkrácený zápis: margin: 0 auto; (0 pro horní/dolní okraj, auto pro levý/pravý) */
+
+  /* Ostatní styly pro .seznam, pokud nějaké potřebuješ, např. odsazení shora/zdola */
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Styly pro nečíslovaný seznam hráčů uvnitř .seznam */
+.seznam ul {
+  padding: 0;
+  margin: 0; /* Tyto marginy už nejsou potřeba pro centrování, pokud je ul jediný obsah .seznam */
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Toto centruje položky li uvnitř ul */
+  gap: 15px;
+}
+
+
+.seznam ul li {
+  font-size: 18px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.seznam ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  display: block;
+}
+

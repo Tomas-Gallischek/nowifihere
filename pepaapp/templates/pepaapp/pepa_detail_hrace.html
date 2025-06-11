@@ -1,0 +1,65 @@
+{% extends "base_detail_hrace.html" %}
+{% load static %}
+{% block title %}{{jmeno}}{{prijmeni}}{% endblock title %}
+
+{% block css_files %} <link rel="stylesheet" href="{% static 'pepaapp/pepa_detail_hrace.css' %}"> {% endblock css_files %}
+
+{% block content %}
+    <div class="container">
+        
+        <div class="nadpis">
+            <h1><u>{{jmeno}} {{prijmeni}}</u></h1>
+            <h4>Tým: <strong>{{tym|capfirst}}</strong></h4>
+        </div>
+
+        <div class= "kroky">
+            <h2><strong><u>CELKEM UŠEL/A: {{kroky_celkem}} kroků</u></strong></h2>
+            <h2>Výsledky:</h2>
+            <p>1.den - <strong>{{kroky1}} </strong> kroků</p> 
+            <p>2.den - <strong>{{kroky2}} </strong> kroků</p> 
+            <p>3.den - <strong>{{kroky3}} </strong> kroků</p> 
+            <p>4.den - <strong>{{kroky4}} </strong> kroků</p> 
+            <p>5.den - <strong>{{kroky5}} </strong> kroků</p> 
+            <p>6.den - <strong>{{kroky6}} </strong> kroků</p> 
+            <p>7.den - <strong>{{kroky7}} </strong> kroků</p> 
+            <p>8.den - <strong>{{kroky8}} </strong> kroků</p> 
+            <p>9.den - <strong>{{kroky9}} </strong> kroků</p> 
+            <p>10.den - <strong>{{kroky10}} </strong> kroků</p> 
+            <p>11.den - <strong>{{kroky11}} </strong> kroků</p> 
+            <p>12.den - <strong>{{kroky12}} </strong> kroků</p> 
+        </div>
+
+        <div class= "stats">
+            <h3>CELKOVÉ POŘADÍ: {{celkove_poradi}} / {{pocet_hracu_CELKEM}}</h3>
+            <h3>POŘADÍ V TÝMU: {{poradi_v_tymu}} / {{pocet_hracu_pepa}}</h3>
+            <h3>OSOBNÍ REKORD: {{rekord}} kroků / den</h3>
+        </div>
+    </div>
+
+
+    <div class="citat">
+        <h3>Citát pro dnešní den:</h3>
+        <p>{{random_citat}}</p>
+    </div>
+<div class="menu">
+    <ul>
+        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+

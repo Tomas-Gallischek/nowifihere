@@ -1,0 +1,67 @@
+{% extends "detail_statistika.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block css_files %}{% endblock css_files %}
+
+{% block content %}
+<h1>Detailní statistika - Den č.<strong><u>{{aktualni_den}}</u></strong>:</h1>
+<h3>Zde lze najít detailní statistiku z PŘEDCHOZÍHO DNE</h3>
+
+<h2>Jídlo a stravování:</h2>
+<p>Pepovo BMI: <strong><u>{{BMI}}</u></strong></p>
+<p>Pepovo BMR: <strong><u>{{pepa_bmr}}</u></strong> kcal</p>
+<p>Příjem kalorií: <strong><u>{{kcal_prijem_dnes}}</u></strong> kcal</p>
+<p>Kalorický výdej: <strong><u>{{kcal_vydej_dnes_SUMA}}</u></strong> kcal</p>
+<p>Rozdíl: <strong><u>{{kcal_rozdil_dnes}}</u></strong> kcal</p>
+<p>Včera se Pepovi podařilo zhubnout: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>
+<p>Pepa aktuálně váží: <strong><u>{{pepa_celkova_vaha}} kg</u></strong></p>
+<p></p>
+
+<h2>Výbava</h2>
+<p>Velikost Pepova batohu: <strong><u>{{kapacita}}</u></strong> l </p>
+<p>Pepovi v batohu zbývá ještě: <strong><u>{{volna_kapacita}}</u></strong> l místa</p>
+
+<h2>Výkon:</h2>
+<p>Pepa včera nachodil: <strong><u>{{aktivita}}</u></strong> h </p>
+<p>Pepovo včerejší tempo: <strong><u>{{tempo}}</u></strong> km/h</p>
+<p>BEZ BONUSŮ Pepa včera ušel: <strong><u>{{pepa_km_dnes}}</u></strong> km</p>
+<p>S BONUSY Pepa včera ušel: <strong><u>{{pepa_km_bez_bonusu}}</u></strong> km</p>
+<p>Pepa už ušel celkem: <strong><u>{{PEPA_FINAL_KM}} km</u></strong></p>
+<p>Pepa dneska získal: <strong><u>{{XP_DNES}} XP</u></strong></p>
+<p>Pepa už má celkem: <strong><u>{{pepa_xp}} XP</u></strong></p>
+<p></p> 
+
+<h2>Tým:</h2>
+<p>Váš tým ušel včera v průměru: <strong><u>{{denni_prumer_kroku}}</u></strong> kroků</p>
+<p>CELKEM jste jako tým už ušli: <strong><u>{{celkem_kroku}}</u></strong> kroků</p>
+<p></p>
+<h2>Aktivní bonusy:</h2>
+<p>BONUS délka kroku: + <strong><u>{{BONUS_delka_kroku_procenta}} % </u></strong></p>
+<p>BONUS BMR: - <strong><u>{{BONUS_BMR_procenta}} % </u></strong></p>
+<p>BONUS zátěž: - <strong><u>{{BONUS_zatez_procenta}} % </u></strong></p>
+<p>BONUS "maminka poslala": + <strong><u>{{BONUS_income_flat}},-/den</u></strong></p>
+<p>BONUS "maminka poslala": + <strong><u>{{BONUS_income_procenta}} % </u></strong></p>
+<p>BONUS kapacita: + <strong><u>{{BONUS_kapacita_flet}} l </u></strong></p>
+<p>BONUS kapacita: + <strong><u>{{BONUS_kapacita_procenta}} % </u></strong></p>
+<p>BONUS XP: + <strong><u>{{BONUS_XP_flat}} XP / 10 000 kroků</u></strong></p>
+<p>BONUS XP: + <strong><u>{{BONUS_XP_procenta}} % </u></strong></p>
+<p>BONUS spánek: + <strong><u>{{BONUS_spanek_flat}} h </u></strong></p>
+<p>BONUS spánek: + <strong><u>{{BONUS_spanek_procenta}} % efektivita</u></strong></p>
+<p>BONUS sleva v obchodě: - <strong><u>{{BONUS_cena_procenta}} % cena</u></strong></p>
+
+
+<div class="menu">
+    <ul>
+        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+
+{% endblock content %}
+

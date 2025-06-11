@@ -1,0 +1,38 @@
+
+{% extends "base_jednotlive_dny.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block css_files %} <link rel="stylesheet" href="{% static 'pepaapp/pepa_jednotlive_dny.css' %}"> {% endblock css_files %}
+
+{% block content %}
+
+{% for den in pepa_pamet %}
+  
+<ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
+    <h1><strong><u>Den:{{den.den}}</u></strong></h1>
+    <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
+  </ol>
+{% endfor %}
+
+
+
+<div class="menu">
+    <ul>
+        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
