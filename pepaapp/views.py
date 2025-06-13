@@ -880,7 +880,7 @@ def pepa_main_page(request):
     context['pepa_pohlavi'] = zakladni_staty.pohlavi
 
 
-
+    raise ValueError("TOTO JE MOJE TESTOVACI A KONTROLOVANA CHYBA")
     return render(request, 'pepaapp/pepa_main_page.html', context)
 
 
