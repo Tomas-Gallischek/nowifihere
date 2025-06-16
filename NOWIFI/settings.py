@@ -10,24 +10,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+import dj_database_url # <--- PŘIDAT TENTO IMPORT
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# SECRET_KEY načtená z proměnné prostředí
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key-for-local-dev')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bc)-@r9_i_%$4ff*k7w4@q(4j8h4gpo5rm*^wn^5)(ohzgr+bx'
+# DEBUG režim načtený z proměnné prostředí
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = ['nowifihere.onrender.com', '127.0.0.1', 'localhost']
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -48,8 +47,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # <--- PŘIDAT TENTO ŘÁDEK
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,10 +84,11 @@ WSGI_APPLICATION = 'NOWIFI.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # Název souboru databáze
-    }
+    'default': dj_database_url.config(
+        # Výchozí hodnota pro lokální vývoj s SQLite
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=600
+    )
 }
 
 
@@ -127,6 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# TOTO PŘIDAT: Cesta, kam `collectstatic` zkopíruje všechny statické soubory.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]

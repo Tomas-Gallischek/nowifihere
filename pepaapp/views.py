@@ -817,6 +817,7 @@ print(f"Aktuální zátěž: {zatez} kg")
 print("")
 
 def pepa_main_page(request):
+
     context = {}
     context['pepa_xp'] = pepa_xp
     context["aktualni_lvl"] = aktualni_lvl
