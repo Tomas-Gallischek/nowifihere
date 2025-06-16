@@ -1,14 +1,15 @@
+/* --- PŮVODNÍ STYLY PRO DESKTOP (zůstávají) --- */
+
 /* Přepíšeme styly pro kontejner, aby vyhovovaly našemu rozložení */
 .container {
     display: grid;
     grid-template-columns: 120px 120px 120px 120px;
     grid-template-rows: 120px 120px 120px 120px;
     gap: 5px;
-    /* Odstraníme původní flexbox vlastnosti z base.css pro tento kontejner */
-    justify-content: center; /* Vycentrujeme mřížku na střed */
-    align-items: center; /* Vycentrujeme položky mřížky na střed */
-    width: auto; /* Přizpůsobíme šířku obsahu */
-    margin: 20px auto; /* Přidáme okraje pro lepší vzhled a vycentrování */
+    justify-content: center; 
+    align-items: center; 
+    width: auto; 
+    margin: 20px auto; 
 }
 
 .item {
@@ -28,45 +29,14 @@
     grid-row: 2/4;
 }
 
-.top-left {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.top-right {
-    grid-column: 3;
-    grid-row: 1;
-}
-
-.bottom-left {
-    grid-column: 2;
-    grid-row: 4;
-}
-
-.bottom-right {
-    grid-column: 3;
-    grid-row: 4;
-}
-
-.left-top {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.left-bottom {
-    grid-column: 1;
-    grid-row: 3;
-}
-
-.right-top {
-    grid-column: 4;
-    grid-row: 2;
-}
-
-.right-bottom {
-    grid-column: 4;
-    grid-row: 3;
-}
+.top-left { grid-column: 2; grid-row: 1; }
+.top-right { grid-column: 3; grid-row: 1; }
+.bottom-left { grid-column: 2; grid-row: 4; }
+.bottom-right { grid-column: 3; grid-row: 4; }
+.left-top { grid-column: 1; grid-row: 2; }
+.left-bottom { grid-column: 1; grid-row: 3; }
+.right-top { grid-column: 4; grid-row: 2; }
+.right-bottom { grid-column: 4; grid-row: 3; }
 
 .item img {
     max-width: 100%;
@@ -76,63 +46,21 @@
 
 .atributy {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 2px;          /* Zmenšíme mezeru mezi řádky a sloupci */
-    column-gap: 2px;   /* Zmenšíme mezeru mezi sloupci */
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
     justify-items: center;
     align-items: center;
-    margin-bottom: 5px;
+    margin: 20px 0;
+    width: 80%;
+    max-width: 900px;
 }
 
-.ukazatel-container-energie {
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.ukazatel-container-kondice {
-    grid-column: 2;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.ukazatel-container-hydratace {
-    grid-column: 3;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.ukazatel-container-sytost {
-    grid-column: 4;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.ukazatel-container-kapacita {
-    grid-column: 2;
-    grid-row: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
+.ukazatel-container-energie,
+.ukazatel-container-kondice,
+.ukazatel-container-hydratace,
+.ukazatel-container-sytost,
+.ukazatel-container-kapacita,
 .ukazatel-container-zatez {
-    grid-column: 3;
-    grid-row: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,43 +69,29 @@
 
 .kruhovy-graf {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background: conic-gradient(red, white 0);
     margin-bottom: 10px;
 }
 
 .kruhovy-graf::after {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 40px;
-    height: 40px;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background: white;
+    background: white; /* Použijeme bílou, aby ladila s gradientem */
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%);
 }
 
-.kruhovy-graf p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-}
-
-/* Kontejner (obal) progress baru */
 .progress-bar-container {
-    /* --- Styly pro POZICI --- */
-    position: fixed;   /* Pozice relativní k oknu prohlížeče */
-    top: 20px;         /* Vzdálenost od horního okraje (můžeš upravit) */
-    right: 20px;        /* Vzdálenost od pravého okraje (můžeš upravit) */
-    z-index: 1000;     /* Zajistí, že bude nad většinou ostatních prvků (volitelné, ale doporučené) */
-
-    /* --- Původní styly pro VZHLED --- */
+    position: fixed;   
+    top: 20px;         
+    right: 20px;       
+    z-index: 1000;     
     width: 200px;
     background-color: #f0f0f0;
     border-radius: 15px;
@@ -189,22 +103,15 @@
 .lvl-text {
     font-family: 'Courier New', Courier, monospace;
     font-size: small;
-    position: fixed;   /* Pozice relativní k oknu prohlížeče */
-    top: 12px;         /* Vzdálenost od horního okraje (můžeš upravit) */
-    right: 235px;        /* Vzdálenost od pravého okraje (můžeš upravit) */
-    z-index: 1000;     /* Zajistí, že bude nad většinou ostatních prvků (volitelné, ale doporučené) */
+    position: fixed;  
+    top: 12px;         
+    right: 235px;        
+    z-index: 1000;     
 }
-/* Vnitřní výplň progress baru (samotný postup) - ZŮSTÁVÁ STEJNÉ */
+
 .progress-bar-fill {
     height: 100%;
     background-color: #28a745;
-    background-image: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, .15) 25%, transparent 25%,
-        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-        transparent 75%, transparent
-    );
-    background-size: 1rem 1rem;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -212,20 +119,110 @@
     transition: width 0.6s ease;
     color: white;
     font-weight: bold;
-    font-size: 0.9em;
 }
 
-/* Text uvnitř progress baru - ZŮSTÁVÁ STEJNÉ */
-.progress-bar-text {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+/* --- NOVÉ STYLY PRO HAMBURGER (skrytý na desktopu) --- */
+#hamburger-btn {
+    display: none; /* Na PC je skryté */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2000; /* Musí být nad menu */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
 }
 
-/* Animace proužků (volitelné) - ZŮSTÁVÁ STEJNÉ */
-@keyframes progress-bar-stripes {
-    from { background-position: 1rem 0; }
-    to { background-position: 0 0; }
+#hamburger-btn span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: black;
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
 }
 
-.progress-bar-fill.animated {
-    animation: progress-bar-stripes 1s linear infinite;
+
+/* === RESPONZIVNÍ STYLY PRO MOBILNÍ ZAŘÍZENÍ === */
+@media (max-width: 900px) { /* Breakpoint můžeme upravit, 900px je dobrý start */
+
+    body {
+        /* Zajistíme, aby na mobilu nebylo zarovnání na střed, které může dělat neplechu */
+        display: block;
+        padding: 15px;
+    }
+    
+    /* 1. Změna menu na hamburger */
+    #hamburger-btn {
+        display: block; /* Zobrazíme tlačítko */
+    }
+
+    .menu {
+        /* Přestylujeme původní menu, aby bylo vysouvací */
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 250px;
+        background: linear-gradient(135deg, white 30%, rgb(22, 129, 22) 120%);
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        z-index: 1500;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* Skryjeme ho mimo obrazovku a připravíme na animaci */
+        transform: translateX(-100%);
+        transition: transform 0.4s ease-in-out;
+    }
+    
+    .menu.active {
+        /* Když má menu třídu .active, vysune se */
+        transform: translateX(0);
+    }
+    
+    .menu ul {
+        width: 100%;
+    }
+    .menu button {
+        width: 80%;
+    }
+
+    /* 2. Úprava mřížky s itemy */
+    .container {
+        /* Zmenšíme mřížku, aby se vešla na šířku mobilu */
+        grid-template-columns: repeat(4, 20vw); /* vw = viewport width, mřížka se přizpůsobí šířce */
+        grid-template-rows: repeat(4, 20vw);
+        margin-top: 50px; /* Dáme prostor nad mřížkou */
+    }
+    
+    /* 3. Úprava statistik (atributů) */
+    .atributy {
+        /* Ze 6 sloupců uděláme 2, aby se to vešlo pod sebe */
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        gap: 20px;
+    }
+
+    /* 4. Přesuneme progress bar a LVL, aby se nepřekrývaly */
+    .progress-bar-container, .lvl-text {
+        position: static; /* Zrušíme fixní pozici */
+        transform: none;  /* Zrušíme případné transformace */
+        margin: 10px auto; /* Vycentrujeme je */
+        width: 80%;
+        max-width: 300px;
+        right: auto;
+        top: auto;
+    }
+    
+    .lvl-text {
+        text-align: center;
+        margin-bottom: -5px;
+    }
+
+    h1, h3, h4, p {
+        text-align: center;
+    }
 }

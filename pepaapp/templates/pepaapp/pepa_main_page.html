@@ -7,6 +7,12 @@
 
 {% block content %}
 
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
 <h1><u>PEPA</u></h1>
 <p>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </p>
 <p>Dneska máme den číslo: <strong>{{nasledujici_den}}</strong> </p>
@@ -79,40 +85,7 @@
   </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const grafy = document.querySelectorAll('.kruhovy-graf');
-
-        grafy.forEach(graf => {
-            const procenta = graf.dataset.procenta;
-            graf.style.background = `conic-gradient(red ${procenta}%, white ${procenta}%)`;
-        });
-    });
-</script>
-<script>
-    // Zde získej nebo nastav skutečnou hodnotu proměnné
-    let next_lvl_procenta = next_lvl_procenta // Příklad: nastavíme 80%
-  
-    // Najdi elementy progress baru a textu
-    let progressBarFill = document.querySelector('.progress-bar-fill');
-    let progressBarText = document.querySelector('.progress-bar-text');
-  
-    // Zkontroluj, jestli elementy existují, a nastav jim hodnoty
-    if (progressBarFill) {
-      // Nastav šířku výplně podle procent
-      progressBarFill.style.width = next_lvl_procenta + '%';
-  
-      // Pokud existuje i element pro text, aktualizuj ho
-      if (progressBarText) {
-        progressBarText.textContent = next_lvl_procenta + '%';
-      }
-    } else {
-      console.error("Element .progress-bar-fill nebyl nalezen!");
-    }
-  </script>
-
-
-<div class="menu">
+<div class="menu" id="nav-menu">
     <ul>
         <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
         <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
@@ -123,7 +96,24 @@
     </ul>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Původní skript pro kruhové grafy
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
+        });
+
+        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
+            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+        });
+    });
+</script>
+
 {% endblock content %}
-
-
-
