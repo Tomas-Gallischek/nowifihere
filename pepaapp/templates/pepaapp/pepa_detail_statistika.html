@@ -5,6 +5,13 @@
 {% block css_files %}{% endblock css_files %}
 
 {% block content %}
+
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
 <h1>Detailní statistika - Den č.<strong><u>{{aktualni_den}}</u></strong>:</h1>
 <h3>Zde lze najít detailní statistiku z PŘEDCHOZÍHO DNE</h3>
 
@@ -51,7 +58,7 @@
 <p>BONUS sleva v obchodě: - <strong><u>{{BONUS_cena_procenta}} % cena</u></strong></p>
 
 
-<div class="menu">
+<div class="menu" id="nav-menu">
     <ul>
         <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
         <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
@@ -61,6 +68,26 @@
         <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
     </ul>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Původní skript pro kruhové grafy
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
+        });
+
+        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
+            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+        });
+    });
+</script>
 
 
 {% endblock content %}
