@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key-for-local-dev')
 # DEBUG režim načtený z proměnné prostředí
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'False'
 
-ALLOWED_HOSTS = ['nowifihere.pythonanywhere.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['lt2025.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 
@@ -64,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates', 
+            BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
