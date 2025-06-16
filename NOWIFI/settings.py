@@ -25,7 +25,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key-for-local-dev')
 # DEBUG režim načtený z proměnné prostředí
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'False'
 
-ALLOWED_HOSTS = ['nowifihere.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['nowifihere.pythonanywhere.com', '127.0.0.1', 'localhost']
+
 
 
 
@@ -129,7 +130,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # TOTO PŘIDAT: Cesta, kam `collectstatic` zkopíruje všechny statické soubory.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #<-- Tady mělo být "staticfilest", ale podle mě to nedává smysl
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
