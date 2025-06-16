@@ -13,6 +13,16 @@
     <span></span>
 </button>
 
+<div class="lvl-text">
+    <h1>LVL:{{aktualni_lvl}}</h1>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar-fill" style="width: {{next_lvl_procenta}}%;">
+        <span class="progress-bar-text">{{next_lvl_procenta}}%</span>
+    </div>
+  </div>
+</div>
+
 <h1><u>PEPA</u></h1>
 <p>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </p>
 <p>Dneska máme den číslo: <strong>{{nasledujici_den}}</strong> </p>
@@ -68,22 +78,14 @@
     </div>
     <div class="ukazatel-container-kapacita">
         <div class="kruhovy-graf" data-procenta="{{volna_kapacita_procenta}}"></div>
-        <p>VOLNÁ KAPACITA: {{volna_kapacita_procenta}} %</p>
+        <p>VOLNÉ MÍSTO: {{volna_kapacita_procenta}} %</p>
     </div>
     <div class="ukazatel-container-zatez">
         <div class="kruhovy-graf" data-procenta="{{zatez_procenta}}"></div>
         <p>ZÁTĚŽ: {{zatez_procenta}} %</p>
     </div>
 </div>
-<div class="lvl-text">
-    <h1>LVL:{{aktualni_lvl}}</h1>
-</div>
-<div class="progress-bar-container">
-    <div class="progress-bar-fill" style="width: {{next_lvl_procenta}}%;">
-        <span class="progress-bar-text">{{next_lvl_procenta}}%</span>
-    </div>
-  </div>
-</div>
+
 
 <div class="menu" id="nav-menu">
     <ul>

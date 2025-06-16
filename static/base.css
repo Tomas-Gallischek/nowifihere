@@ -1,7 +1,7 @@
 /* Nastavení písma */
 /* Nastavení písma a pozadí */
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 20px;
   background: linear-gradient(135deg, white 30%, rgb(22, 129, 22) 90%);
   background-attachment: fixed;
