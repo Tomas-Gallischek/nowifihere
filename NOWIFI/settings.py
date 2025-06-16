@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key-for-local-dev')
 
 # DEBUG režim načtený z proměnné prostředí
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'False'
 
 ALLOWED_HOSTS = ['nowifihere.onrender.com', '127.0.0.1', 'localhost']
 
