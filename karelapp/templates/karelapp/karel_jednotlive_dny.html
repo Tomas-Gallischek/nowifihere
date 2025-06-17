@@ -1,0 +1,64 @@
+
+{% extends "base_jednotlive_dny.html" %}
+{% load static %}
+{% block title %}JEDNOTLIVÉ DNY{% endblock title %}
+
+{% block css_files %} <link rel="stylesheet" href="{% static 'karelapp/karel_jednotlive_dny.css' %}"> {% endblock css_files %}
+
+{% block content %}
+
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+{% for den in karel_pamet %}
+  
+<ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
+    <h1><strong><u>Den:{{den.den}}</u></strong></h1>
+    <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
+  </ol>
+{% endfor %}
+
+
+
+<div class="menu" id="nav-menu">
+    <ul>
+        <li><button><a href="{% url 'karel_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'karel_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'karel_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'karel_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'karel_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Původní skript pro kruhové grafy
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
+        });
+
+        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
+            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+        });
+    });
+</script>
+
+{% endblock content %}
+
+
+
+
+
+
+

@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django import forms
-from .models import aktualniden, food_drink, vybava, aktivita_kcal2, kondice_hubnuti, spanek, hraci_v_tymu, pamet_pepa
+from .models import aktualniden, food_drink, vybava, aktivita_kcal2, kondice_hubnuti, spanek, hraci_v_tymu, pamet_pepa, pamet_karel, pamet_brunhilda
 from pepaapp.models import pepa_zakladni_staty, pepa_snedl, pepa_snedl_polozka, pepa_equip, InventarPolozkaFood, InventarPolozkaVybava, pepa_inv
+
+
 
 # AKTUÁLNÍ DEN
 class aktualnidenAdmin(admin.ModelAdmin):
@@ -53,4 +55,18 @@ class pamet_pepaAdmin(admin.ModelAdmin):
         obj.save()
         
 admin.site.register(pamet_pepa, pamet_pepaAdmin)
+
+# PAMĚŤ
+class pamet_karelAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        obj.save()
+        
+admin.site.register(pamet_karel, pamet_karelAdmin)
+
+# PAMĚŤ
+class pamet_brunhildaAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        obj.save()
+        
+admin.site.register(pamet_brunhilda, pamet_brunhildaAdmin)
 

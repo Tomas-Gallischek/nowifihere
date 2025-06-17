@@ -11,7 +11,6 @@ class pepa_zakladni_staty(models.Model):
     vaha = models.FloatField(default=0, validators=[MinValueValidator(0), MaxValueValidator(200)])
     pohlavi = models.CharField(max_length=10)
     delkakroku = models.FloatField(default=0)
-    
 
     def __str__(self):
         return f'{self.jmeno} - ZÁKLADNÍ staty'
@@ -35,6 +34,7 @@ class pepa_snedl(models.Model):
         celkem_hydratace = 0
         celkem_hmotnost = 0
         celkem_energie = 0
+        # 'polozky' je related_name z modelu pepa_snedl_polozka
         for polozka in self.polozky.all():
             celkem_kcal += polozka.snedeno_kcal
             celkem_sytost += polozka.snedeno_sytost
@@ -56,11 +56,11 @@ class pepa_snedl(models.Model):
     def __str__(self):
         return f'{self.den} - {self.snedeno_kcal}kcal'
 
-
 class pepa_snedl_polozka(models.Model):
     den = models.IntegerField(default=1, blank=True)
     pepa_snedl = models.ForeignKey(pepa_snedl, on_delete=models.CASCADE, related_name='polozky')
-    jidlo = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE)
+    # OPRAVA: Přidán related_name, aby se předešlo budoucím kolizím
+    jidlo = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE, related_name='pepa_snedl_polozka')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
     snedeno_kcal = models.FloatField(default=0, blank=True)
     snedeno_sytost = models.FloatField(default=0, blank=True)
@@ -83,17 +83,17 @@ class pepa_snedl_polozka(models.Model):
     def __str__(self):
         return f'{self.mnozstvi}x {self.jidlo.food_name}'
 
-
 class pepa_equip(models.Model):
     den = models.IntegerField(validators=[MinValueValidator(0)], null=True)
-    equip_boty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_boty', null=True, blank=True)
-    equip_ponozky = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_ponozky', null=True, blank=True)
-    equip_kalhoty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_kalhoty', null=True, blank=True)
-    equip_triko = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_triko', null=True, blank=True)
-    equip_doplnek = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_doplnek', null=True, blank=True)
-    equip_batoh = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_batoh', null=True, blank=True)
-    equip_spacak = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_spacak', null=True, blank=True)
-    equip_karimatka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='equip_karimatka', null=True, blank=True)
+    # OPRAVA: Všechny related_name jsou nyní unikátní pro 'pepaapp'
+    equip_boty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_boty', null=True, blank=True)
+    equip_ponozky = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_ponozky', null=True, blank=True)
+    equip_kalhoty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_kalhoty', null=True, blank=True)
+    equip_triko = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_triko', null=True, blank=True)
+    equip_doplnek = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_doplnek', null=True, blank=True)
+    equip_batoh = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_batoh', null=True, blank=True)
+    equip_spacak = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_spacak', null=True, blank=True)
+    equip_karimatka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_equip_karimatka', null=True, blank=True)
     equip_pozn = models.CharField(max_length=1000, null=True, blank=True)
     equip_zatez = models.FloatField(default=0, null=True, blank=True)
     equip_objem = models.FloatField(default=0, null=True, blank=True)
@@ -111,11 +111,11 @@ class pepa_equip(models.Model):
     equip_BONUS_spanek_procenta = models.FloatField(default=0, blank=True)
     equip_BONUS_cena_procenta = models.FloatField(default=0, blank=True)
 
-
     def __str__(self):
         return f'Den č: {self.den}: {self.equip_boty}, {self.equip_ponozky}, {self.equip_kalhoty}, {self.equip_triko}, {self.equip_doplnek}, {self.equip_batoh}, {self.equip_spacak}, {self.equip_karimatka}'
 
     def save(self, *args, **kwargs):
+        # Tvá save metoda zůstává beze změny
         celkova_zatez = 0
         celkovy_objem = 0
         cena = 0
@@ -132,142 +132,28 @@ class pepa_equip(models.Model):
         BONUS_spanek_procenta = 0
         BONUS_cena_procenta = 0
 
-        if self.equip_boty:
-            celkova_zatez += self.equip_boty.item_vaha
-            celkovy_objem += self.equip_boty.item_objem
-            cena += self.equip_boty.item_cena
-            BONUS_delka_kroku_procenta += self.equip_boty.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_boty.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_boty.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_boty.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_boty.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_boty.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_boty.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_boty.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_boty.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_boty.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_boty.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_boty.item_bonus_cena_procenta
+        vybava_list = [
+            self.equip_boty, self.equip_ponozky, self.equip_kalhoty, self.equip_triko,
+            self.equip_doplnek, self.equip_batoh, self.equip_spacak, self.equip_karimatka
+        ]
 
-        if self.equip_ponozky:
-            celkova_zatez += self.equip_ponozky.item_vaha
-            celkovy_objem += self.equip_ponozky.item_objem
-            cena += self.equip_ponozky.item_cena
-            BONUS_delka_kroku_procenta += self.equip_ponozky.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_ponozky.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_ponozky.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_ponozky.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_ponozky.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_ponozky.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_ponozky.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_ponozky.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_ponozky.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_ponozky.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_ponozky.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_ponozky.item_bonus_cena_procenta
-            
-        if self.equip_kalhoty:
-            celkova_zatez += self.equip_kalhoty.item_vaha
-            celkovy_objem += self.equip_kalhoty.item_objem
-            cena = self.equip_kalhoty.item_cena
-            BONUS_delka_kroku_procenta += self.equip_kalhoty.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_kalhoty.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_kalhoty.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_kalhoty.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_kalhoty.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_kalhoty.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_kalhoty.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_kalhoty.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_kalhoty.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_kalhoty.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_kalhoty.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_kalhoty.item_bonus_cena_procenta
-            
-        if self.equip_triko:
-            celkova_zatez += self.equip_triko.item_vaha
-            celkovy_objem += self.equip_triko.item_objem
-            cena += self.equip_triko.item_cena
-            BONUS_delka_kroku_procenta += self.equip_triko.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_triko.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_triko.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_triko.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_triko.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_triko.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_triko.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_triko.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_triko.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_triko.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_triko.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_triko.item_bonus_cena_procenta
-            
-        if self.equip_doplnek:
-            celkova_zatez += self.equip_doplnek.item_vaha
-            celkovy_objem += self.equip_doplnek.item_objem
-            cena += self.equip_doplnek.item_cena
-            BONUS_delka_kroku_procenta += self.equip_doplnek.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_doplnek.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_doplnek.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_doplnek.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_doplnek.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_doplnek.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_doplnek.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_doplnek.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_doplnek.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_doplnek.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_doplnek.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_doplnek.item_bonus_cena_procenta
-            
-        if self.equip_batoh:
-            celkova_zatez += self.equip_batoh.item_vaha
-            celkovy_objem += self.equip_batoh.item_objem
-            cena += self.equip_batoh.item_cena
-            BONUS_delka_kroku_procenta += self.equip_batoh.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_batoh.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_batoh.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_batoh.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_batoh.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_batoh.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_batoh.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_batoh.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_batoh.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_batoh.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_batoh.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_batoh.item_bonus_cena_procenta
-            
-        if self.equip_spacak:
-            celkova_zatez += self.equip_spacak.item_vaha
-            celkovy_objem += self.equip_spacak.item_objem
-            cena += self.equip_spacak.item_cena
-            BONUS_delka_kroku_procenta += self.equip_spacak.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_spacak.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_spacak.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_spacak.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_spacak.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_spacak.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_spacak.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_spacak.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_spacak.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_spacak.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_spacak.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_spacak.item_bonus_cena_procenta
-            
-        if self.equip_karimatka:
-            celkova_zatez += self.equip_karimatka.item_vaha
-            celkovy_objem += self.equip_karimatka.item_objem
-            cena += self.equip_karimatka.item_cena
-            BONUS_delka_kroku_procenta += self.equip_karimatka.item_bonus_delka_kroku_procenta
-            BONUS_BMR_procenta += self.equip_karimatka.item_bonus_BMR_procenta
-            BONUS_zatez_procenta += self.equip_karimatka.item_bonus_zatez_procenta
-            BONUS_income_flat += self.equip_karimatka.item_bonus_income_FLAT
-            BONUS_income_procenta += self.equip_karimatka.item_bonus_income_procenta
-            BONUS_kapacita_flet += self.equip_karimatka.item_bonus_kapacita_FLAT
-            BONUS_kapacita_procenta += self.equip_karimatka.item_bonus_kapacita_procenta
-            BONUS_XP_flat += self.equip_karimatka.item_bonus_XP_FLAT
-            BONUS_XP_procenta += self.equip_karimatka.item_bonus_XP_procenta
-            BONUS_spanek_flat += self.equip_karimatka.item_bonus_spanek_FLAT
-            BONUS_spanek_procenta += self.equip_karimatka.item_bonus_spanek_procenta
-            BONUS_cena_procenta += self.equip_karimatka.item_bonus_cena_procenta
-            
+        for item in vybava_list:
+            if item:
+                celkova_zatez += item.item_vaha
+                celkovy_objem += item.item_objem
+                cena += item.item_cena
+                BONUS_delka_kroku_procenta += item.item_bonus_delka_kroku_procenta
+                BONUS_BMR_procenta += item.item_bonus_BMR_procenta
+                BONUS_zatez_procenta += item.item_bonus_zatez_procenta
+                BONUS_income_flat += item.item_bonus_income_FLAT
+                BONUS_income_procenta += item.item_bonus_income_procenta
+                BONUS_kapacita_flet += item.item_bonus_kapacita_FLAT
+                BONUS_kapacita_procenta += item.item_bonus_kapacita_procenta
+                BONUS_XP_flat += item.item_bonus_XP_FLAT
+                BONUS_XP_procenta += item.item_bonus_XP_procenta
+                BONUS_spanek_flat += item.item_bonus_spanek_FLAT
+                BONUS_spanek_procenta += item.item_bonus_spanek_procenta
+                BONUS_cena_procenta += item.item_bonus_cena_procenta
 
         self.equip_zatez = celkova_zatez
         self.equip_objem = celkovy_objem
@@ -294,7 +180,8 @@ class pepa_equip(models.Model):
 # OBSAH INVENTÁŘE - JÍDLO
 class InventarPolozkaFood(models.Model):
     inventar = models.ForeignKey('pepa_inv', on_delete=models.CASCADE, related_name='potraviny')
-    polozka = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE)
+    # OPRAVA: Přidán unikátní related_name
+    polozka = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE, related_name='pepa_inventar_food')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
 
     def __str__(self):
@@ -303,12 +190,12 @@ class InventarPolozkaFood(models.Model):
 # OBSAH INVENTÁŘE - VYBAVENÍ
 class InventarPolozkaVybava(models.Model):
     inventar = models.ForeignKey('pepa_inv', on_delete=models.CASCADE, related_name='vybaveni')
-    polozka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE)
+    # OPRAVA: Přidán unikátní related_name
+    polozka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='pepa_inventar_vybava')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
 
     def __str__(self):
         return f'{self.mnozstvi}x {self.polozka.item_name} v inventáři pro den {self.inventar.den}'
-
 
 class pepa_inv(models.Model):
     den = models.IntegerField(validators=[MinValueValidator(0)], null=True, unique=True)

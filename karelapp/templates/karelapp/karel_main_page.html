@@ -3,17 +3,120 @@
 
 {% block title %}KAREL{% endblock title %}
 
-{% block css_files %}
-
-<link rel="stylesheet" href="{% static "karelapp/karel_main_page.css" %}">
-
-{% endblock css_files %}
+{% block css_files %} <link rel="stylesheet" href="{% static "karelapp/karel_main_page.css" %}"> {% endblock css_files %}
 
 {% block content %}
 
-<H1>KAREL - HLAVNÍ STRÁNKA</H1>
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<h1><strong><u>KAREL</u></strong></h1>
+
+<div class="lvl-text">
+    <h1>LVL:{{aktualni_lvl}}</h1>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar-fill" style="width: {{next_lvl_procenta}}%;">
+        <span class="progress-bar-text">{{next_lvl_procenta}}%</span>
+    </div>
+  </div>
+</div>
+
+</h2>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </h2>
+<p>Dneska máme den číslo: <strong>{{nasledujici_den}}</strong> </p>
+<p>Maminka dneska poslala: {{money_income}} Kč</p>
+<p>PROGRES: <strong>{{KAREL_FINAL_KROKY}}</strong> / <strong>320</strong> km </p>
+
+<div class="container">
+    <div class="item top-left">
+        <img src="{% static spacak_img %}" alt="Spacák">
+    </div>
+    <div class="item top-right">
+        <img src="{% static karimatka_img %}" alt="Karimatka">
+    </div>
+    <div class="item left-top">
+        <img src="{% static triko_img %}" alt="Tričko">
+    </div>
+    <div class="item left-bottom">
+        <img src="{% static kalhoty_img %}" alt="Kalhoty">
+    </div>
+    <div class="item center">
+        <img src="{% static "images/karel-avatar.png" %}" alt="Avatar">
+    </div>
+    <div class="item right-top">
+        <img src="{% static batoh_img %}" alt="Batoh">
+    </div>
+    <div class="item right-bottom">
+        <img src="{% static doplnek_img %}" alt="Doplněk">
+    </div>
+    <div class="item bottom-left">
+        <img src={% static boty_img %} alt="Boty">
+    </div>
+    <div class="item bottom-right">
+        <img src="{% static ponozky_img %}" alt="Ponožky">
+    </div>
+</div>
+
+<div class="atributy">
+    <div class="ukazatel-container-energie">
+        <div class="kruhovy-graf" data-procenta="{{karel_energie_procenta}}"></div>
+        <p>ENERGIE: {{karel_energie_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-kondice">
+        <div class="kruhovy-graf" data-procenta="{{kondice_procenta}}"></div>
+        <p>KONDICE: {{kondice_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-hydratace">
+        <div class="kruhovy-graf" data-procenta="{{hydratace_procenta}}"></div>
+        <p>HYDRATACE: {{hydratace_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-sytost">
+        <div class="kruhovy-graf" data-procenta="{{sytost_procenta}}"></div>
+        <p>SYTOST: {{sytost_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-kapacita">
+        <div class="kruhovy-graf" data-procenta="{{volna_kapacita_procenta}}"></div>
+        <p>VOLNÉ MÍSTO: {{volna_kapacita_procenta}} %</p>
+    </div>
+    <div class="ukazatel-container-zatez">
+        <div class="kruhovy-graf" data-procenta="{{zatez_procenta}}"></div>
+        <p>ZÁTĚŽ: {{zatez_procenta}} %</p>
+    </div>
+</div>
+
+
+<div class="menu" id="nav-menu">
+    <ul>
+        <li><button><a href="{% url 'karel_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'karel_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'karel_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'karel_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'karel_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Původní skript pro kruhové grafy
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
+        });
+
+        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
+            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+        });
+    });
+</script>
 
 {% endblock content %}
-
-
-

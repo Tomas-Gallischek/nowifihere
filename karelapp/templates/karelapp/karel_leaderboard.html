@@ -1,0 +1,57 @@
+{% extends "base_leaderboard.html" %}
+{% load static %}
+
+{% block title %}KAREL - LEADERBOARD{% endblock title %}
+
+{% block css_files %}{% endblock css_files %}
+
+{% block content %}
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<ol>
+{% for hrac in vsichni_hraci_pepa|dictsortreversed:"celkem_kroku" %}
+    <li>
+        {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} kroků
+    </li>
+{% endfor %}
+</ol>
+
+<div class="menu" id="nav-menu">
+    <ul>
+        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Původní skript pro kruhové grafy
+        const grafy = document.querySelectorAll('.kruhovy-graf');
+        grafy.forEach(graf => {
+            const procenta = graf.dataset.procenta;
+            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
+        });
+
+        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
+            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+        });
+    });
+</script>
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,82 @@
+{% extends "base_detail_hrace.html" %}
+{% load static %}
+
+{% block title %}{{ jmeno }} {{ prijmeni }}{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'karelapp/karel_detail_hrace.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+
+{# ----- Hamburger tlačítko a menu zůstávají beze změny ----- #}
+<button id="hamburger-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="menu" id="nav-menu">
+    <ul>
+        <li><button><a href="{% url 'karel_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'karel_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'karel_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'karel_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'karel_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
+    </ul>
+</div>
+{# ----------------------------------------------------------- #}
+
+
+{# ----- NOVÁ A PŘEHLEDNÁ STRUKTURA OBSAHU ----- #}
+<main class="detail-content">
+
+    <h1 class="player-name"><u>{{ jmeno }} {{ prijmeni }}</u></h1>
+
+    <h2 class="total-steps">Celkem ušel/a: <strong>{{ kroky_celkem }}</strong> kroků</h2>
+    
+    <h3 class="player-team">Tým: <strong>{{ tym|capfirst }}</strong></h3>
+
+    <div class="player-stats">
+        <h4>Pořadí v týmu: <strong>{{ poradi_v_tymu }} / {{ pocet_hracu_karel }}</strong></h4>
+        <h4>Celkové pořadí: <strong>{{ celkove_poradi }} / {{ pocet_hracu_CELKEM }}</strong></h4>
+        <h4>Osobní rekord: <strong>{{ rekord }}</strong> kroků / den</h4>
+    </div>
+
+    <div class="daily-results">
+        <h2>Výsledky</h2>
+        <ul class="daily-steps-list">
+            {% if kroky_BONUS > 0 %}
+                <li>BONUS: <strong>{{ kroky_BONUS }}</strong> kroků</li>
+            {% endif %}
+            {% for kroky in kroky_list %}
+                {% if kroky > 0 %}
+                    <li>{{ forloop.counter }}. den <strong>{{ kroky }}</strong> kroků</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="quote">
+        <h4>Citát pro dnešní den:</h4>
+        <p>"{{ random_citat }}"</p>
+    </div>
+
+</main>
+
+
+{# ----- Skript pro menu zůstává beze změny ----- #}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active');
+        });
+    });
+</script>
+
+{% endblock content %}

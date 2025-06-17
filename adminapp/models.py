@@ -141,6 +141,46 @@ class pamet_pepa(models.Model):
         verbose_name = "Paměť - PEPA"
         verbose_name_plural = "Paměť - PEPA"
 
+class pamet_karel(models.Model):
+    den = models.IntegerField(blank=True)
+    energie = models.IntegerField(blank=True)
+    kondice = models.IntegerField(blank=True)
+    hydratace = models.IntegerField(blank=True)
+    sytost = models.IntegerField(blank=True)
+    volna_kapacita = models.FloatField(blank=True)
+    zatez = models.IntegerField(blank=True)
+    pepova_aktualni_vaha = models.FloatField(default=0, blank=True)
+
+    km_s_bonusem = models.FloatField(default=0, blank=True)
+    aktual_XP = models.IntegerField(default=0, blank=True)
+    
+    def __str__(self):
+        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.pepova_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
+    
+    class Meta:
+        verbose_name = "Paměť - KAREL"
+        verbose_name_plural = "Paměť - KAREL"
+
+class pamet_brunhilda(models.Model):
+    den = models.IntegerField(blank=True)
+    energie = models.IntegerField(blank=True)
+    kondice = models.IntegerField(blank=True)
+    hydratace = models.IntegerField(blank=True)
+    sytost = models.IntegerField(blank=True)
+    volna_kapacita = models.FloatField(blank=True)
+    zatez = models.IntegerField(blank=True)
+    pepova_aktualni_vaha = models.FloatField(default=0, blank=True)
+
+    km_s_bonusem = models.FloatField(default=0, blank=True)
+    aktual_XP = models.IntegerField(default=0, blank=True)
+    
+    def __str__(self):
+        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.pepova_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
+    
+    class Meta:
+        verbose_name = "Paměť - BRUNHILDA"
+        verbose_name_plural = "Paměť - BRUNHILDA"
+
 
 class motivacni_citat(models.Model):
     citat = models.CharField(max_length=1000, blank=True)
