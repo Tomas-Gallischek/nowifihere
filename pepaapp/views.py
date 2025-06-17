@@ -936,7 +936,22 @@ def detail_hrace(request, id):
     except:
         pass
 
-    
+    kroky_celkem = (hracid.celkem_kroku)+(hracid.kroky_BONUS)
+
+    kroky_list = [
+        hracid.kroky1,
+        hracid.kroky2,
+        hracid.kroky3,
+        hracid.kroky4,
+        hracid.kroky5,
+        hracid.kroky6,
+        hracid.kroky7,
+        hracid.kroky8,
+        hracid.kroky9,
+        hracid.kroky10,
+        hracid.kroky11,
+        hracid.kroky12,
+    ]
     motivacni_citaty = [
     "Nejlepší způsob, jak začít, je přestat mluvit a začít dělat. - Walt Disney",
     "Váš čas je omezený, tak ho neztrácejte životem někoho jiného. - Steve Jobs",
@@ -1002,23 +1017,13 @@ def detail_hrace(request, id):
         'pocet_hracu_karel': pocet_hracu_karel,
         'pocet_hracu_brunhilda': pocet_hracu_brunhilda,
         'pocet_hracu_CELKEM': pocet_hracu_celkem,
+        'kroky_BONUS': hracid.kroky_BONUS,
+        'kroky_list': kroky_list,
+        'kroky_celkem': kroky_celkem,
         'rekord': rekord,
         'tym': hracid.tym,
         'jmeno': hracid.jmeno,
         'prijmeni': hracid.prijmeni,
-        'kroky1' : hracid.kroky1,
-        'kroky2' : hracid.kroky2,
-        'kroky3' : hracid.kroky3,
-        'kroky4' : hracid.kroky4,
-        'kroky5' : hracid.kroky5,
-        'kroky6' : hracid.kroky6,
-        'kroky7' : hracid.kroky7,
-        'kroky8' : hracid.kroky8,
-        'kroky9' : hracid.kroky9,
-        'kroky10' : hracid.kroky10,
-        'kroky11' : hracid.kroky11,
-        'kroky12' : hracid.kroky12,
-        'kroky_celkem': hracid.celkem_kroku,
         'random_citat': nahodny_citat
     })
 

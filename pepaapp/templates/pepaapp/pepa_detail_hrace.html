@@ -1,53 +1,20 @@
 {% extends "base_detail_hrace.html" %}
 {% load static %}
-{% block title %}{{jmeno}}{{prijmeni}}{% endblock title %}
 
-{% block css_files %} <link rel="stylesheet" href="{% static 'pepaapp/pepa_detail_hrace.css' %}"> {% endblock css_files %}
+{% block title %}{{ jmeno }} {{ prijmeni }}{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'pepaapp/pepa_detail_hrace.css' %}">
+{% endblock css_files %}
 
 {% block content %}
 
+{# ----- Hamburger tlačítko a menu zůstávají beze změny ----- #}
 <button id="hamburger-btn">
     <span></span>
     <span></span>
     <span></span>
 </button>
-
-    <div class="container">
-        
-        <div class="nadpis">
-            <h1><u>{{jmeno}} {{prijmeni}}</u></h1>
-            <h4>Tým: <strong>{{tym|capfirst}}</strong></h4>
-        </div>
-
-        <div class= "kroky">
-            <h2><strong><u>CELKEM UŠEL/A: {{kroky_celkem}} kroků</u></strong></h2>
-            <h2>Výsledky:</h2>
-            <p>1.den - <strong>{{kroky1}} </strong> kroků</p> 
-            <p>2.den - <strong>{{kroky2}} </strong> kroků</p> 
-            <p>3.den - <strong>{{kroky3}} </strong> kroků</p> 
-            <p>4.den - <strong>{{kroky4}} </strong> kroků</p> 
-            <p>5.den - <strong>{{kroky5}} </strong> kroků</p> 
-            <p>6.den - <strong>{{kroky6}} </strong> kroků</p> 
-            <p>7.den - <strong>{{kroky7}} </strong> kroků</p> 
-            <p>8.den - <strong>{{kroky8}} </strong> kroků</p> 
-            <p>9.den - <strong>{{kroky9}} </strong> kroků</p> 
-            <p>10.den - <strong>{{kroky10}} </strong> kroků</p> 
-            <p>11.den - <strong>{{kroky11}} </strong> kroků</p> 
-            <p>12.den - <strong>{{kroky12}} </strong> kroků</p> 
-        </div>
-
-        <div class= "stats">
-            <h3>CELKOVÉ POŘADÍ: {{celkove_poradi}} / {{pocet_hracu_CELKEM}}</h3>
-            <h3>POŘADÍ V TÝMU: {{poradi_v_tymu}} / {{pocet_hracu_pepa}}</h3>
-            <h3>OSOBNÍ REKORD: {{rekord}} kroků / den</h3>
-        </div>
-    </div>
-
-
-    <div class="citat">
-        <h3>Citát pro dnešní den:</h3>
-        <p>{{random_citat}}</p>
-    </div>
 
 <div class="menu" id="nav-menu">
     <ul>
@@ -59,35 +26,57 @@
         <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
     </ul>
 </div>
+{# ----------------------------------------------------------- #}
 
+
+{# ----- NOVÁ A PŘEHLEDNÁ STRUKTURA OBSAHU ----- #}
+<main class="detail-content">
+
+    <h1 class="player-name"><u>{{ jmeno }} {{ prijmeni }}</u></h1>
+
+    <h2 class="total-steps">Celkem ušel/a: <strong>{{ kroky_celkem }}</strong> kroků</h2>
+    
+    <h3 class="player-team">Tým: <strong>{{ tym|capfirst }}</strong></h3>
+
+    <div class="player-stats">
+        <h4>Pořadí v týmu: <strong>{{ poradi_v_tymu }} / {{ pocet_hracu_pepa }}</strong></h4>
+        <h4>Celkové pořadí: <strong>{{ celkove_poradi }} / {{ pocet_hracu_CELKEM }}</strong></h4>
+        <h4>Osobní rekord: <strong>{{ rekord }}</strong> kroků / den</h4>
+    </div>
+
+    <div class="daily-results">
+        <h2>Výsledky</h2>
+        <ul class="daily-steps-list">
+            {% if kroky_BONUS > 0 %}
+                <li>BONUS: <strong>{{ kroky_BONUS }}</strong> kroků</li>
+            {% endif %}
+            {% for kroky in kroky_list %}
+                {% if kroky > 0 %}
+                    <li>{{ forloop.counter }}. den <strong>{{ kroky }}</strong> kroků</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="quote">
+        <h4>Citát pro dnešní den:</h4>
+        <p>"{{ random_citat }}"</p>
+    </div>
+
+</main>
+
+
+{# ----- Skript pro menu zůstává beze změny ----- #}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Původní skript pro kruhové grafy
-        const grafy = document.querySelectorAll('.kruhovy-graf');
-        grafy.forEach(graf => {
-            const procenta = graf.dataset.procenta;
-            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
-        });
-
-        // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
 
         hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active'); // Přepíná třídu "active" na menu
-            hamburgerBtn.classList.toggle('active'); // Přepíná třídu "active" na tlačítku
+            navMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active');
         });
     });
 </script>
 
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-

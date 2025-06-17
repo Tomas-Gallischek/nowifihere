@@ -1,0 +1,104 @@
+/* ------------------------------------------------- */
+/* Nové styly pro detail hráče (responzivní)     */
+/* ------------------------------------------------- */
+
+/* Hlavní kontejner pro obsah stránky */
+.detail-content {
+    display: flex;
+    flex-direction: column; /* Uspořádá prvky pod sebe */
+    align-items: center;   /* Zarovná vše horizontálně na střed */
+    width: 100%;
+    max-width: 650px; /* Maximální šířka na velkých obrazovkách pro lepší čitelnost */
+    margin: 0 auto;     /* Vycentrování kontejneru samotného */
+    padding: 20px;
+    box-sizing: border-box; /* Zajišťuje, že padding neovlivní celkovou šířku */
+    gap: 15px; /* Vytvoří vertikální mezery mezi všemi přímými dětmi */
+}
+
+/* Sjednocení zarovnání textu pro všechny prvky uvnitř */
+.detail-content * {
+    text-align: center;
+}
+
+/* Jméno hráče */
+.player-name {
+    font-size: 2.2em; /* Větší písmo pro hlavní nadpis */
+    font-weight: 700;
+    margin-bottom: 5px; /* Menší mezera pod jménem */
+}
+
+/* Celkové kroky */
+.total-steps {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #168116; /* Zelená barva pro zvýraznění */
+    margin: 0;
+}
+
+/* Tým hráče */
+.player-team {
+    font-size: 1.2em;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Kontejner pro statistiky (pořadí a rekord) */
+.player-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Menší mezery mezi statistikami */
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px 25px;
+    border-radius: 15px;
+    margin-top: 15px; /* Větší mezera nad statistikami */
+}
+
+.player-stats h4 {
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Blok s denními výsledky */
+.daily-results {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.daily-results h2 {
+    font-size: 1.6em;
+}
+
+.daily-steps-list {
+    list-style-type: none; /* Odstranění teček u seznamu */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.daily-steps-list li {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+/* Blok s citátem */
+.quote {
+    margin-top: 20px;
+    padding: 15px;
+    border-left: 4px solid #168116;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 0 8px 8px 0;
+}
+
+.quote h4 {
+    margin: 0 0 5px 0;
+    font-weight: 700;
+}
+
+.quote p {
+    margin: 0;
+    font-style: italic;
+}
