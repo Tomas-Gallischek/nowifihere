@@ -13,7 +13,7 @@
 </button>
 
 <ol>
-{% for hrac in vsichni_hraci_pepa|dictsortreversed:"celkem_kroku" %}
+{% for hrac in vsichni_hraci_karel|dictsortreversed:"celkem_kroku" %}
     <li>
         {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} kroků
     </li>

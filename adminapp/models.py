@@ -149,7 +149,7 @@ class pamet_karel(models.Model):
     sytost = models.IntegerField(blank=True)
     volna_kapacita = models.FloatField(blank=True)
     zatez = models.IntegerField(blank=True)
-    pepova_aktualni_vaha = models.FloatField(default=0, blank=True)
+    karlova_aktualni_vaha = models.FloatField(default=0, blank=True)
 
     km_s_bonusem = models.FloatField(default=0, blank=True)
     aktual_XP = models.IntegerField(default=0, blank=True)
@@ -169,7 +169,7 @@ class pamet_brunhilda(models.Model):
     sytost = models.IntegerField(blank=True)
     volna_kapacita = models.FloatField(blank=True)
     zatez = models.IntegerField(blank=True)
-    pepova_aktualni_vaha = models.FloatField(default=0, blank=True)
+    brunhilda_aktualni_vaha = models.FloatField(default=0, blank=True)
 
     km_s_bonusem = models.FloatField(default=0, blank=True)
     aktual_XP = models.IntegerField(default=0, blank=True)
