@@ -790,8 +790,9 @@ def full_tym(request):
 
 
 def leaderboard(request):
+    hraci_leaderboard = vysledky_hracu.objects.filter(tym="karel")
     return render(request, 'karelapp/karel_leaderboard.html', {
-        'vsichni_hraci_karel': hraci,
+        'vsichni_hraci_karel': hraci_leaderboard,
     })
 
 def detail_hrace(request, id):
