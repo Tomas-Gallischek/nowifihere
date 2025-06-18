@@ -9,6 +9,10 @@ from infopage.models import vysledky_hracu
 
 
 vsichni_hraci = vysledky_hracu.objects.all()
+hraci_pepa = vysledky_hracu.objects.filter(tym="pepa")
+hraci_karel = vysledky_hracu.objects.filter(tym="karel")
+hraci_brunhilda = vysledky_hracu.objects.filter(tym="brunhilda")
+
 
 def statistiky(request):
     return render(request, 'adminapp/statistiky_avataru.html', {
@@ -46,5 +50,8 @@ def adminpage(request):
 
 def detail_vsech_hracu(request):
     return render(request, 'adminapp/detail_vsech_hracu.html', {
-        "vsichni_hraci": vsichni_hraci
+        "vsichni_hraci": vsichni_hraci,
+        "hraci_pepa": hraci_pepa,
+        'hraci_karel': hraci_karel,
+        'hraci_brunhilda': hraci_brunhilda
     })

@@ -9,10 +9,31 @@
 
 <div class="seznam">
     <ul>
-        {% for hrac in vsichni_hraci|dictsortreversed:"celkem_kroku" %}
-                <li>
-                    <strong>{{hrac.jmeno}} {{hrac.prijmeni}} - </strong> <u>{{hrac.celkem_kroku}}</u> kroků - ({{hrac.tym}}) 
-                </li>
+        <strong><u>PEPA:</u></strong>
+        {% for hrac in hraci_pepa|dictsortreversed:"celkem_kroku" %}
+            <li>
+                <a href="{% url 'pepa_detail_hrace' hrac.id %}">
+                    {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} Kroků
+                </a>                  
+            </li>
+        {% endfor %}
+
+        <strong><u>KAREL:</u></strong>
+        {% for hrac in hraci_karel|dictsortreversed:"celkem_kroku" %}
+            <li>
+                <a href="{% url 'karel_detail_hrace' hrac.id %}">
+                    {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} Kroků
+                </a>                  
+            </li>
+        {% endfor %}
+
+        <strong><u>BRUNHILDA:</u></strong>
+        {% for hrac in hraci_brunhilda|dictsortreversed:"celkem_kroku" %}
+            <li>
+                <a href="{% url 'brunhilda_detail_hrace' hrac.id %}">
+                    {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} Kroků
+                </a>                  
+            </li>
         {% endfor %}
     </ul>
 </div>
