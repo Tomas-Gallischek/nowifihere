@@ -153,8 +153,6 @@ if volna_kapacita<0:
 if volna_kapacita>150:
     volna_kapacita_procenta=150
 
-
-
 # TEMPO
 aktivita_dnes = spanek.objects.get(den=(aktualni_den))
 tempo = round(((brunhilda_km_dnes)/(aktivita_dnes.brunhilda_aktivita)),1)
