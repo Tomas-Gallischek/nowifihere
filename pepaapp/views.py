@@ -579,9 +579,15 @@ xp_vcera_pamet = xp_vcera.aktual_XP
 pepa_xp = round(((((suma_kroky/100)/(pocet_hracu_pepa))+(XP_bonus_flat))*BONUS_XP_procenta))
 XP_DNES = pepa_xp-xp_vcera_pamet
 
+
+
 #PEPA LVL
+if pepa_xp <= 80:
+    pepa_xp = 100
+
 lvl1 = 80
 lvlkons = 2
+
 
 lvl2 = round(lvl1+(lvl1/lvlkons))
 lvl3 = lvl2+round((lvl2/lvlkons))
@@ -657,6 +663,8 @@ for lvl in levely.values():
     else:
         aktualni_lvl = aktualni_lvl-1
         xp_na_next_lvl = lvl
+
+
 
 bonus_km_lvl = 1+(aktualni_lvl/20)
 

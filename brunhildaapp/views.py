@@ -573,6 +573,9 @@ brunhilda_xp = round(((((suma_kroky/100)/(pocet_hracu_brunhilda))+(XP_bonus_flat
 XP_DNES = brunhilda_xp-xp_vcera_pamet
 
 #BRUNHILDA LVL
+if brunhilda_xp <= 80:
+    brunhilda_xp = 100
+
 lvl1 = 80
 lvlkons = 2
 

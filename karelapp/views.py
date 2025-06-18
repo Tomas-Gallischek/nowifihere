@@ -584,6 +584,10 @@ karel_xp = round(((((suma_kroky/100)/(pocet_hracu_karel))+(XP_bonus_flat))*BONUS
 XP_DNES = karel_xp-xp_vcera_pamet
 
 #KAREL LVL
+
+if karel_xp <= 80:
+    karel_xp = 100
+
 lvl1 = 80
 lvlkons = 2
 
@@ -663,6 +667,12 @@ for lvl in levely.values():
         xp_na_next_lvl = lvl
 
 bonus_km_lvl = 1+(aktualni_lvl/20)
+
+print(f"XP {karel_xp}")
+print(f"Aktuální lvl {aktualni_lvl}")
+print(f"next_lvl_jeste_chybi {next_lvl_jeste_chybi}")
+print(f"xp_next_lv {xp_next_lvl}")
+
 
 next_lvl_procenta = round(karel_xp/(xp_next_lvl/100),1)
 
