@@ -10,11 +10,9 @@
 <div class="seznam">
     <ul>
         {% for hrac in vsichni_hraci|dictsortreversed:"celkem_kroku" %}
-            <li>
-                <a href="{% url 'detail_hrace' hrac.id %}">
-                    {{hrac.jmeno}} {{hrac.prijmeni}}
-                </a>                
-            </li>
+                <li>
+                    <strong>{{hrac.jmeno}} {{hrac.prijmeni}} - </strong> <u>{{hrac.celkem_kroku}}</u> kroků - ({{hrac.tym}}) 
+                </li>
         {% endfor %}
     </ul>
 </div>
