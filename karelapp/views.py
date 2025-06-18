@@ -27,6 +27,7 @@ pocet_hracu_brunhilda = pocet_hracu_brunhilda_objekt.pocet_hracu_brunhilda
 
 pocet_hracu_celkem = (pocet_hracu_karel)+(pocet_hracu_karel)+(pocet_hracu_brunhilda)
 
+
 # ZÁKLADNÍ STATY
 zakladni_staty = karel_zakladni_staty.objects.get(id=1)
 

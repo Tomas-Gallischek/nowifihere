@@ -1,37 +1,32 @@
-{% extends "base_full_tym.html" %}
+{% extends "base_leaderboard.html" %}
 {% load static %}
 
-{% block title %}DETAIL HRÁČŮ - KAREL{% endblock title %}
+{% block title %}BRUNHILDA - LEADERBOARD{% endblock title %}
 
 {% block css_files %}{% endblock css_files %}
 
 {% block content %}
-
 <button id="hamburger-btn">
     <span></span>
     <span></span>
     <span></span>
 </button>
 
-<div class="seznam">
-    <ul>
-        {% for hrac in karel_vsichni_hraci %}
-            <li>
-                <a href="{% url 'karel_detail_hrace' hrac.id %}">
-                    {{hrac.jmeno}} {{hrac.prijmeni}}
-                </a>                
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+<ol>
+{% for hrac in vsichni_hraci_brunhilda|dictsortreversed:"celkem_kroku" %}
+    <li>
+        {{hrac.jmeno}} {{hrac.prijmeni}} - {{hrac.celkem_kroku}} kroků
+    </li>
+{% endfor %}
+</ol>
 
 <div class="menu" id="nav-menu">
     <ul>
-        <li><button><a href="{% url 'karel_main_page' %}">Přehled avatara</a></button></li>
-        <li><button><a href="{% url 'karel_detail_statistika' %} ">Detailní statistika</a></button></li>
-        <li><button><a href="{% url 'karel_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
-        <li><button><a href="{% url 'karel_full_tym' %} ">Detail hráčů</a></button></li>
-        <li><button><a href="{% url 'karel_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'brunhilda_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'brunhilda_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'brunhilda_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'brunhilda_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'brunhilda_leaderboard' %} ">Žebříček - TÝM</a></button></li>
         <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
     </ul>
 </div>
@@ -57,6 +52,3 @@
 </script>
 
 {% endblock content %}
-
-
-

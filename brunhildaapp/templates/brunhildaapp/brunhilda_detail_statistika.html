@@ -16,27 +16,27 @@
 <h3>Zde lze najít detailní statistiku z PŘEDCHOZÍHO DNE</h3>
 
 <h2>Jídlo a stravování:</h2>
-<p>Pepovo BMI: <strong><u>{{BMI}}</u></strong></p>
-<p>Pepovo BMR: <strong><u>{{pepa_bmr}}</u></strong> kcal</p>
+<p>Brunhildino BMI: <strong><u>{{BMI}}</u></strong></p>
+<p>Brunhildino BMR: <strong><u>{{brunhilda_bmr}}</u></strong> kcal</p>
 <p>Příjem kalorií: <strong><u>{{kcal_prijem_dnes}}</u></strong> kcal</p>
 <p>Kalorický výdej: <strong><u>{{kcal_vydej_dnes_SUMA}}</u></strong> kcal</p>
 <p>Rozdíl: <strong><u>{{kcal_rozdil_dnes}}</u></strong> kcal</p>
-<p>Včera se Pepovi podařilo zhubnout: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>
-<p>Pepa aktuálně váží: <strong><u>{{pepa_celkova_vaha}} kg</u></strong></p>
+<p>Včera se Brunhildě podařilo zhubnout: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>
+<p>Brunhilda aktuálně váží: <strong><u>{{brunhilda_celkova_vaha}} kg</u></strong></p>
 <p></p>
 
 <h2>Výbava</h2>
-<p>Velikost Pepova batohu: <strong><u>{{kapacita}}</u></strong> l </p>
-<p>Pepovi v batohu zbývá ještě: <strong><u>{{volna_kapacita}}</u></strong> l místa</p>
+<p>Velikost Brunhildina batohu: <strong><u>{{kapacita}}</u></strong> l </p>
+<p>Brunhildě v batohu zbývá ještě: <strong><u>{{volna_kapacita}}</u></strong> l místa</p>
 
 <h2>Výkon:</h2>
-<p>Pepa včera nachodil: <strong><u>{{aktivita}}</u></strong> h </p>
-<p>Pepovo včerejší tempo: <strong><u>{{tempo}}</u></strong> km/h</p>
-<p>BEZ BONUSŮ Pepa včera ušel: <strong><u>{{pepa_km_dnes}}</u></strong> km</p>
-<p>S BONUSY Pepa včera ušel: <strong><u>{{pepa_km_bez_bonusu}}</u></strong> km</p>
-<p>Pepa už ušel celkem: <strong><u>{{PEPA_FINAL_KM}} km</u></strong></p>
-<p>Pepa dneska získal: <strong><u>{{XP_DNES}} XP</u></strong></p>
-<p>Pepa už má celkem: <strong><u>{{pepa_xp}} XP</u></strong></p>
+<p>Brunhilda včera nachodil: <strong><u>{{aktivita}}</u></strong> h </p>
+<p>Brunhildino včerejší tempo: <strong><u>{{tempo}}</u></strong> km/h</p>
+<p>BEZ BONUSŮ Brunhilda včera ušela: <strong><u>{{brunhilda_km_dnes}}</u></strong> km</p>
+<p>S BONUSY Brunhilda včera ušela: <strong><u>{{brunhilda_km_bez_bonusu}}</u></strong> km</p>
+<p>Brunhilda už ušela celkem: <strong><u>{{BRUNHILDA_FINAL_KM}} km</u></strong></p>
+<p>Brunhilda dneska získala: <strong><u>{{XP_DNES}} XP</u></strong></p>
+<p>Brunhilda už má celkem: <strong><u>{{brunhilda_xp}} XP</u></strong></p>
 <p></p> 
 
 <h2>Tým:</h2>
@@ -60,11 +60,11 @@
 
 <div class="menu" id="nav-menu">
     <ul>
-        <li><button><a href="{% url 'pepa_main_page' %}">Přehled avatara</a></button></li>
-        <li><button><a href="{% url 'pepa_detail_statistika' %} ">Detailní statistika</a></button></li>
-        <li><button><a href="{% url 'pepa_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
-        <li><button><a href="{% url 'pepa_full_tym' %} ">Detail hráčů</a></button></li>
-        <li><button><a href="{% url 'pepa_leaderboard' %} ">Žebříček - TÝM</a></button></li>
+        <li><button><a href="{% url 'brunhilda_main_page' %}">Přehled avatara</a></button></li>
+        <li><button><a href="{% url 'brunhilda_detail_statistika' %} ">Detailní statistika</a></button></li>
+        <li><button><a href="{% url 'brunhilda_jednotlive_dny' %} ">Výsledky za jednotlivé dny</a></button></li>
+        <li><button><a href="{% url 'brunhilda_full_tym' %} ">Detail hráčů</a></button></li>
+        <li><button><a href="{% url 'brunhilda_leaderboard' %} ">Žebříček - TÝM</a></button></li>
         <li><button><a href="{% url 'all_leaderboard' %}">Žebříček - VŠICHNI</a></button></li>
     </ul>
 </div>
@@ -91,4 +91,3 @@
 
 
 {% endblock content %}
-

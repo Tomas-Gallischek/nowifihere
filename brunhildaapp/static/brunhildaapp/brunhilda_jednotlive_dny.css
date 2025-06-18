@@ -1,0 +1,30 @@
+/* Styly pro blok záznamu o dni */
+.den-zaznam {
+  padding-left: 0; /* Odstraní výchozí odsazení seznamu zleva */
+  list-style-type: none; /* Odstraní případné odrážky/číslování (pro <ol> bez <li>) */
+  margin-top: 10px; /* Mezera nad blokem dne */
+  margin-bottom: 10px; /* Mezera pod blokem dne (tj. mezi jednotlivými dny) */
+  /* Můžeš upravit hodnoty 10px podle toho, jak velké mezery chceš */
+}
+
+/* Styly pro nadpis dne (H1) uvnitř bloku */
+.den-zaznam h1 {
+  margin-top: 20px; /* Menší mezera nad nadpisem */
+  margin-bottom: 20px; /* Menší mezera pod nadpisem */
+  font-size: 1.4em; /* Můžeš upravit velikost písma, pokud je výchozí H1 moc velké */
+  /* Pro odstranění tučného písma a podtržení z H1 a ponechání jen na obsahu: */
+  /* font-weight: normal; */
+  /* text-decoration: none; */
+}
+
+/* Styly pro jednotlivé řádky textu uvnitř bloku */
+.den-zaznam {
+  line-height: 0.5; /* Zmenšuje výšku řádku, což sblíží řádky textu. Standardní je cca 1.5-1.6. Experimentuj s touto hodnotou. */
+}
+
+/* Volitelné: Pokud chceš upravit vzhled samotných popisků a hodnot */
+.den-zaznam u {
+  text-decoration: none; /* Pokud nechceš podtržení, ale raději jiný styl */
+  /* Například: */
+  /* color: #555; */ /* Jiná barva pro popisek */
+}

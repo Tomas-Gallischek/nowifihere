@@ -155,7 +155,7 @@ class pamet_karel(models.Model):
     aktual_XP = models.IntegerField(default=0, blank=True)
     
     def __str__(self):
-        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.pepova_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
+        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.karlova_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
     
     class Meta:
         verbose_name = "Paměť - KAREL"
@@ -175,7 +175,7 @@ class pamet_brunhilda(models.Model):
     aktual_XP = models.IntegerField(default=0, blank=True)
     
     def __str__(self):
-        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.pepova_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
+        return f'DEN:{self.den} - Energie:{self.energie}%, Kondice:{self.kondice}%, hydratace:{self.hydratace}%, Sytost:{self.sytost}%, Zátěž:{self.zatez}%, V.K.:{self.volna_kapacita}%, Aktuální váha:{self.brunhilda_aktualni_vaha}kg, Celkem KM:{self.km_s_bonusem}'
     
     class Meta:
         verbose_name = "Paměť - BRUNHILDA"

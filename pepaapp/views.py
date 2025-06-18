@@ -25,6 +25,8 @@ pocet_hracu_brunhilda = pocet_hracu_brunhilda_objekt.pocet_hracu_brunhilda
 
 pocet_hracu_celkem = (pocet_hracu_pepa)+(pocet_hracu_karel)+(pocet_hracu_brunhilda)
 
+
+
 # ZÁKLADNÍ STATY
 zakladni_staty = pepa_zakladni_staty.objects.get(id=1)
 
@@ -570,7 +572,6 @@ elif vykon_procenta <= 0:
 
 # PEPA XP
 hraci_pepa = hraci_v_tymu.objects.first()
-pocet_hracu_pepa = hraci_pepa.pocet_hracu_pepa
 XP_bonus_flat = round((suma_kroky/10000),1)*(BONUS_XP_flat)
 xp_vcera = pamet_pepa.objects.get(den=vcerejsi_den)
 xp_vcera_pamet = xp_vcera.aktual_XP

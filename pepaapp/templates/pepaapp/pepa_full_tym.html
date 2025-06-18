@@ -1,7 +1,7 @@
 {% extends "base_full_tym.html" %}
 {% load static %}
 
-{% block title %}PEPA - Full tým{% endblock title %}
+{% block title %}DETAIL HRÁČŮ - PEPA{% endblock title %}
 
 {% block css_files %}{% endblock css_files %}
 
@@ -17,7 +17,7 @@
     <ul>
         {% for hrac in pepa_vsichni_hraci %}
             <li>
-                <a href="{% url 'detail_hrace' hrac.id %}">
+                <a href="{% url 'pepa_detail_hrace' hrac.id %}">
                     {{hrac.jmeno}} {{hrac.prijmeni}}
                 </a>                
             </li>
