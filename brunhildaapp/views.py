@@ -90,15 +90,16 @@ brunhilda_BMR = round(brunhilda_BMR,2)
 
 
 # DENNÍ PRŮMĚR KROKŮ - DNES
-if aktualni_den >= 1 and aktualni_den <= 12:
+dnesni_prumer_kroku=1
+
+if aktualni_den > 1 and aktualni_den <= 12:
     sloupec = f'kroky{aktualni_den}'
     dnesni_prumer_kroku = vysledky_hracu.objects.filter(tym="brunhilda").aggregate(Avg(sloupec))[f'{sloupec}__avg']
 else:
     brunhilda_kroky_bonus = vysledky_hracu.objects.filter(tym="brunhilda")
     for hrac in brunhilda_kroky_bonus:
-        dnesni_prumer_kroku=1
         dnesni_prumer_kroku += hrac.kroky_BONUS
-
+    dnesni_prumer_kroku = (round((dnesni_prumer_kroku)/(pocet_hracu_brunhilda)))
 
 # SOUČET KROKŮ ZA JEDNOTLIVÉ DNY CELÝ TÝM
 agregovane_hodnoty = vysledky_hracu.objects.filter(tym="brunhilda").aggregate(
@@ -564,7 +565,6 @@ elif vykon_procenta <= 0:
 
 
 # BRUNHILDA XP
-hraci_brunhilda = hraci_v_tymu.objects.first()
 XP_bonus_flat = round((suma_kroky/10000),1)*(BONUS_XP_flat)
 xp_vcera = pamet_brunhilda.objects.get(den=vcerejsi_den)
 xp_vcera_pamet = xp_vcera.aktual_XP
@@ -574,7 +574,8 @@ XP_DNES = brunhilda_xp-xp_vcera_pamet
 
 #BRUNHILDA LVL
 if brunhilda_xp <= 80:
-    brunhilda_xp = 100
+    brunhilda_xp = 81
+    XP_DNES = 81
 
 lvl1 = 80
 lvlkons = 2
@@ -902,7 +903,7 @@ def detail_hrace(request, id):
 
     
     return render(request, 'brunhildaapp/brunhilda_detail_hrace.html', {
-        'brunhilda_vsichni_hraci': hraci_brunhilda,
+        'brunhilda_vsichni_hraci': pocet_hracu_brunhilda,
         'celkove_poradi': poradi,
         'poradi_v_tymu': poradi_v_tymu,
         'pocet_hracu_pepa': pocet_hracu_pepa,

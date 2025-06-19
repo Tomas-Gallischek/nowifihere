@@ -92,17 +92,16 @@ pepa_BMR = round(pepa_BMR,2)
 
 
 # DENNÍ PRŮMĚR KROKŮ - DNES
+dnesni_prumer_kroku=1
 
-
-if aktualni_den >= 1 and aktualni_den <= 12:
+if aktualni_den > 1 and aktualni_den <= 12:
     sloupec = f'kroky{aktualni_den}'
     dnesni_prumer_kroku = vysledky_hracu.objects.filter(tym="pepa").aggregate(Avg(sloupec))[f'{sloupec}__avg']
 else:
     pepa_kroky_bonus = vysledky_hracu.objects.filter(tym="pepa")
     for hrac in pepa_kroky_bonus:
-        dnesni_prumer_kroku=1
         dnesni_prumer_kroku += hrac.kroky_BONUS
-
+    dnesni_prumer_kroku = round((dnesni_prumer_kroku)/(pocet_hracu_pepa))
 
 # SOUČET KROKŮ ZA JEDNOTLIVÉ DNY CELÝ TÝM
 agregovane_hodnoty = vysledky_hracu.objects.filter(tym="pepa").aggregate(
@@ -571,19 +570,19 @@ elif vykon_procenta <= 0:
 
 
 # PEPA XP
-hraci_pepa = hraci_v_tymu.objects.first()
 XP_bonus_flat = round((suma_kroky/10000),1)*(BONUS_XP_flat)
 xp_vcera = pamet_pepa.objects.get(den=vcerejsi_den)
 xp_vcera_pamet = xp_vcera.aktual_XP
 
+
+
 pepa_xp = round(((((suma_kroky/100)/(pocet_hracu_pepa))+(XP_bonus_flat))*BONUS_XP_procenta))
 XP_DNES = pepa_xp-xp_vcera_pamet
 
-
-
 #PEPA LVL
 if pepa_xp <= 80:
-    pepa_xp = 100
+    pepa_xp = 81
+    XP_DNES = 81
 
 lvl1 = 80
 lvlkons = 2
@@ -912,7 +911,7 @@ def detail_hrace(request, id):
 
     
     return render(request, 'pepaapp/pepa_detail_hrace.html', {
-        'pepa_vsichni_hraci': hraci_pepa,
+        'pepa_vsichni_hraci': pocet_hracu_pepa,
         'celkove_poradi': poradi,
         'poradi_v_tymu': poradi_v_tymu,
         'pocet_hracu_pepa': pocet_hracu_pepa,

@@ -95,16 +95,17 @@ karel_BMR = round(karel_BMR,2)
 
 
 # DENNÍ PRŮMĚR KROKŮ - DNES
+dnesni_prumer_kroku=1
 
-
-if aktualni_den >= 1 and aktualni_den <= 12:
+if aktualni_den > 1 and aktualni_den <= 12:
     sloupec = f'kroky{aktualni_den}'
     dnesni_prumer_kroku = vysledky_hracu.objects.filter(tym="karel").aggregate(Avg(sloupec))[f'{sloupec}__avg']
 else:
     karel_kroky_bonus = vysledky_hracu.objects.filter(tym="karel")
     for hrac in karel_kroky_bonus:
-        dnesni_prumer_kroku=1
         dnesni_prumer_kroku += hrac.kroky_BONUS
+    dnesni_prumer_kroku = (round((dnesni_prumer_kroku)/(pocet_hracu_karel)))
+
 
 
 # SOUČET KROKŮ ZA JEDNOTLIVÉ DNY CELÝ TÝM
@@ -574,8 +575,6 @@ elif vykon_procenta <= 0:
 
 
 # KAREL XP
-hraci_karel = hraci_v_tymu.objects.first()
-pocet_hracu_karel = hraci_karel.pocet_hracu_karel
 XP_bonus_flat = round((suma_kroky/10000),1)*(BONUS_XP_flat)
 xp_vcera = pamet_karel.objects.get(den=vcerejsi_den)
 xp_vcera_pamet = xp_vcera.aktual_XP
@@ -586,7 +585,8 @@ XP_DNES = karel_xp-xp_vcera_pamet
 #KAREL LVL
 
 if karel_xp <= 80:
-    karel_xp = 100
+    karel_xp = 81
+    XP_DNES = 81
 
 lvl1 = 80
 lvlkons = 2
@@ -667,12 +667,6 @@ for lvl in levely.values():
         xp_na_next_lvl = lvl
 
 bonus_km_lvl = 1+(aktualni_lvl/20)
-
-print(f"XP {karel_xp}")
-print(f"Aktuální lvl {aktualni_lvl}")
-print(f"next_lvl_jeste_chybi {next_lvl_jeste_chybi}")
-print(f"xp_next_lv {xp_next_lvl}")
-
 
 next_lvl_procenta = round(karel_xp/(xp_next_lvl/100),1)
 
@@ -919,7 +913,7 @@ def detail_hrace(request, id):
 
     
     return render(request, 'karelapp/karel_detail_hrace.html', {
-        'karel_vsichni_hraci': hraci_karel,
+        'karel_vsichni_hraci': pocet_hracu_karel,
         'celkove_poradi': poradi,
         'poradi_v_tymu': poradi_v_tymu,
         'pocet_hracu_karel': pocet_hracu_karel,
