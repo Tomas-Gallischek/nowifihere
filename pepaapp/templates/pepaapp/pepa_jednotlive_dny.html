@@ -14,11 +14,12 @@
 </button>
 
 {% for den in pepa_pamet %}
-  
-<ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
-    <h1><strong><u>Den:{{den.den}}</u></strong></h1>
-    <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
-  </ol>
+    {% if den.den > 0 %}
+        <ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
+            <h1><strong><u>Den:{{den.den}}</u></strong></h1>
+            <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
+        </ol>
+    {% endif %}
 {% endfor %}
 
 
@@ -35,14 +36,6 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Původní skript pro kruhové grafy
-        const grafy = document.querySelectorAll('.kruhovy-graf');
-        grafy.forEach(graf => {
-            const procenta = graf.dataset.procenta;
-            graf.style.background = `conic-gradient(green ${procenta}%, #ddd ${procenta}%)`;
-        });
-
         // NOVÝ SKRIPT PRO OVLÁDÁNÍ HAMBURGER MENU
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');

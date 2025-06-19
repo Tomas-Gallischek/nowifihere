@@ -13,12 +13,13 @@
     <span></span>
 </button>
 
-{% for den in karel_pamet %}
-  
-<ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
-    <h1><strong><u>Den:{{den.den}}</u></strong></h1>
-    <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
-  </ol>
+{% for den in pepa_pamet %}
+    {% if den.den > 0 %}
+        <ol class="den-zaznam">  {# Přidána třída "den-zaznam" #}
+            <h1><strong><u>Den:{{den.den}}</u></strong></h1>
+            <u>KM s bonusem:</u><strong>{{den.km_s_bonusem}} Km</strong><br>
+        </ol>
+    {% endif %}
 {% endfor %}
 
 
