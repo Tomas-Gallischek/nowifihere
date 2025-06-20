@@ -6,7 +6,7 @@ from numpy import True_, true_divide
 
 class vysledky_hracu(models.Model):
     jmeno = models.CharField(max_length=20)
-    prijmeni = models.CharField(max_length=30, blank=True)
+    prijmeni = models.CharField(max_length=40, blank=True)
     tym = models.CharField(max_length=10, null=True)
     # Odstraněn max_length u FloatField, není standardní
     koeficient = models.FloatField(null=True, blank=True, default=1)
@@ -60,7 +60,7 @@ class vysledky_hracu(models.Model):
         kroky_po_koeficientu = [
             self.kroky1, self.kroky2, self.kroky3, self.kroky4,
             self.kroky5, self.kroky6, self.kroky7, self.kroky8,
-            self.kroky9, self.kroky10, self.kroky11, self.kroky12
+            self.kroky9, self.kroky10, self.kroky11, self.kroky12, self.kroky_BONUS
         ]
         self.max_kroku_mesicne = max(kroky_po_koeficientu)
         

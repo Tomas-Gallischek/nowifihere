@@ -26,7 +26,13 @@
 </div>
 
 <h2>TÁBOROVÝ DEN Č.: <strong>{{nasledujici_den}}</strong> </h2>
-<h2>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </h2>
+
+{% if aktualni_den < 1%}
+    <h2>Dobrodružství začíná!</h2>
+{% else %}
+    <h2>Data ze dne: <STRONg>{{aktualni_den}}</STRONg> </h2>
+{% endif %}
+
 <p>Maminka dneska poslala: <strong>{{money_income}} Kč</strong></p>
 <p>PROGRES: <strong>{{BRUNHILDA_FINAL_KROKY}}</strong> / <strong>320</strong> km </p>
 
