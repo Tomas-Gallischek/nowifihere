@@ -21,7 +21,13 @@
 <p>Příjem kalorií: <strong><u>{{kcal_prijem_dnes}}</u></strong> kcal</p>
 <p>Kalorický výdej: <strong><u>{{kcal_vydej_dnes_SUMA}}</u></strong> kcal</p>
 <p>Rozdíl: <strong><u>{{kcal_rozdil_dnes}}</u></strong> kcal</p>
-<p>Včera se Karlovi podařilo zhubnout: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>
+
+{% if hubnuti_nabirani > 0 %}
+    <p>Karel včera přibral: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>
+{% else %}
+    <p>Karel včera zhubnul: <strong><u>{{hubnuti_nabirani}}</u></strong> kg</p>  
+{% endif %}
+
 <p>Karel aktuálně váží: <strong><u>{{karel_celkova_vaha}} kg</u></strong></p>
 <p></p>
 
