@@ -36,8 +36,6 @@ aktualni_den_objekt = aktualniden.objects.get(id=1)
 aktualni_den = aktualni_den_objekt.cislo_dne
 nasledujici_den = aktualni_den+1
 
-aktualni_den = 1
-
 # KARLUV AKTUÁLNÍ EQUIP
 aktual_equip = karel_equip.objects.get(den=aktualni_den)
 aktual_equip_boty_nazev = aktual_equip.equip_boty
