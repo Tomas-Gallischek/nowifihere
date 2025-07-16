@@ -154,13 +154,10 @@ karel_equip_objem = karel_equip_objem.equip_objem
 volna_kapacita = round((((kapacita_batohu)-(objem_inv))),2)
 volna_kapacita_procenta = round((volna_kapacita)/((kapacita_batohu)/100))
 
-
 if volna_kapacita<0:
     volna_kapacita_procenta=0.1
 if volna_kapacita>150:
     volna_kapacita_procenta=150
-
-
 
 # TEMPO
 aktivita_dnes = spanek.objects.get(den=(aktualni_den))
