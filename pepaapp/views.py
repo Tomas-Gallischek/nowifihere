@@ -37,6 +37,7 @@ nasledujici_den = aktualni_den+1
 
 # PEPUV AKTUÁLNÍ EQUIP
 aktual_equip = pepa_equip.objects.get(den=aktualni_den)
+print(f"EQUIP: {aktual_equip}")
 aktual_equip_boty_nazev = aktual_equip.equip_boty
 aktual_equip_ponozky_nazev = aktual_equip.equip_ponozky
 aktual_equip_kalhoty_nazev = aktual_equip.equip_kalhoty

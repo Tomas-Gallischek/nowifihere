@@ -112,9 +112,61 @@ class karel_equip(models.Model):
     def __str__(self):
         return f'Den č: {self.den}: {self.equip_boty}, {self.equip_ponozky}, {self.equip_kalhoty}, {self.equip_triko}, {self.equip_doplnek}, {self.equip_batoh}, {self.equip_spacak}, {self.equip_karimatka}'
 
-    # Metoda save() zůstává beze změny, zde jsem ji pro přehlednost zkrátil
     def save(self, *args, **kwargs):
-        # ... tvoje stávající logika ...
+        celkova_zatez = 0
+        celkovy_objem = 0
+        cena = 0
+        BONUS_delka_kroku_procenta = 0
+        BONUS_BMR_procenta = 0
+        BONUS_zatez_procenta = 0
+        BONUS_income_flat = 0
+        BONUS_income_procenta = 0
+        BONUS_kapacita_flet = 0
+        BONUS_kapacita_procenta = 0
+        BONUS_XP_flat = 0
+        BONUS_XP_procenta = 0
+        BONUS_spanek_flat = 0
+        BONUS_spanek_procenta = 0
+        BONUS_cena_procenta = 0
+
+        vybava_list = [
+            self.equip_boty, self.equip_ponozky, self.equip_kalhoty, self.equip_triko,
+            self.equip_doplnek, self.equip_batoh, self.equip_spacak, self.equip_karimatka
+        ]
+
+        for item in vybava_list:
+            if item:
+                celkova_zatez += item.item_vaha
+                celkovy_objem += item.item_objem
+                cena += item.item_cena
+                BONUS_delka_kroku_procenta += item.item_bonus_delka_kroku_procenta
+                BONUS_BMR_procenta += item.item_bonus_BMR_procenta
+                BONUS_zatez_procenta += item.item_bonus_zatez_procenta
+                BONUS_income_flat += item.item_bonus_income_FLAT
+                BONUS_income_procenta += item.item_bonus_income_procenta
+                BONUS_kapacita_flet += item.item_bonus_kapacita_FLAT
+                BONUS_kapacita_procenta += item.item_bonus_kapacita_procenta
+                BONUS_XP_flat += item.item_bonus_XP_FLAT
+                BONUS_XP_procenta += item.item_bonus_XP_procenta
+                BONUS_spanek_flat += item.item_bonus_spanek_FLAT
+                BONUS_spanek_procenta += item.item_bonus_spanek_procenta
+                BONUS_cena_procenta += item.item_bonus_cena_procenta
+
+        self.equip_zatez = celkova_zatez
+        self.equip_objem = celkovy_objem
+        self.equip_cena = cena
+        self.equip_BONUS_delka_kroku_procenta = BONUS_delka_kroku_procenta
+        self.equip_BONUS_BMR_procenta = BONUS_BMR_procenta
+        self.equip_BONUS_zatez_procenta = BONUS_zatez_procenta
+        self.equip_BONUS_income_flat = BONUS_income_flat
+        self.equip_BONUS_income_procenta = BONUS_income_procenta
+        self.equip_BONUS_kapacita_flet = BONUS_kapacita_flet
+        self.equip_BONUS_kapacita_procenta = BONUS_kapacita_procenta
+        self.equip_BONUS_XP_flat = BONUS_XP_flat
+        self.equip_BONUS_XP_procenta = BONUS_XP_procenta
+        self.equip_BONUS_spanek_flat = BONUS_spanek_flat
+        self.equip_BONUS_spanek_procenta = BONUS_spanek_procenta
+        self.equip_BONUS_cena_procenta = BONUS_cena_procenta
         super().save(*args, **kwargs)
 
     class Meta:

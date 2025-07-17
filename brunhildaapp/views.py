@@ -131,10 +131,13 @@ delka_kroku = (zakladni_staty.delkakroku)*(BONUS_delka_kroku_procenta)
 brunhilda_km_dnes = round((((dnesni_prumer_kroku)*(delka_kroku)/100)/1000), 2)
 
 # KAPACITA
+
 # brunhildin aktualni batoh
 if BONUS_kapacita_flet == 0:
     BONUS_kapacita_flet = 5
 kapacita_batohu = (BONUS_kapacita_flet)*(BONUS_kapacita_procenta)
+
+
 
 # objem inventáře (všechno co brunhilda má)
 brunhilda_inv_instance = brunhilda_inv.objects.get(den=aktualni_den)  # Získání objektu s daným dnem
