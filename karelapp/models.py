@@ -58,7 +58,6 @@ class karel_snedl(models.Model):
 class karel_snedl_polozka(models.Model):
     den = models.IntegerField(default=1, blank=True)
     karel_snedl = models.ForeignKey(karel_snedl, on_delete=models.CASCADE, related_name='polozky')
-    # OPRAVA: Přidán unikátní related_name
     jidlo = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE, related_name='karel_snedl_polozka')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
     snedeno_kcal = models.FloatField(default=0, blank=True)
@@ -83,7 +82,6 @@ class karel_snedl_polozka(models.Model):
 
 class karel_equip(models.Model):
     den = models.IntegerField(validators=[MinValueValidator(0)], null=True)
-    # OPRAVA: Všechny related_name jsou nyní unikátní pro 'karelapp'
     equip_boty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_boty', null=True, blank=True)
     equip_ponozky = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_ponozky', null=True, blank=True)
     equip_kalhoty = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_kalhoty', null=True, blank=True)
@@ -176,7 +174,6 @@ class karel_equip(models.Model):
 # OBSAH INVENTÁŘE - JÍDLO
 class InventarPolozkaFood(models.Model):
     inventar = models.ForeignKey('karel_inv', on_delete=models.CASCADE, related_name='potraviny')
-    # OPRAVA: Přidán unikátní related_name
     polozka = models.ForeignKey('adminapp.food_drink', on_delete=models.CASCADE, related_name='karel_inventar_food')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
 
@@ -186,7 +183,6 @@ class InventarPolozkaFood(models.Model):
 # OBSAH INVENTÁŘE - VYBAVENÍ
 class InventarPolozkaVybava(models.Model):
     inventar = models.ForeignKey('karel_inv', on_delete=models.CASCADE, related_name='vybaveni')
-    # OPRAVA: Přidán unikátní related_name
     polozka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_inventar_vybava')
     mnozstvi = models.IntegerField(default=1, validators=[MinValueValidator(0)])
 
