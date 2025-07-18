@@ -90,7 +90,6 @@ class karel_equip(models.Model):
     equip_batoh = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_batoh', null=True, blank=True)
     equip_spacak = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_spacak', null=True, blank=True)
     equip_karimatka = models.ForeignKey('adminapp.vybava', on_delete=models.CASCADE, related_name='karel_equip_karimatka', null=True, blank=True)
-    equip_pozn = models.CharField(max_length=1000, null=True, blank=True)
     equip_zatez = models.FloatField(default=0, null=True, blank=True)
     equip_objem = models.FloatField(default=0, null=True, blank=True)
     equip_cena = models.FloatField(default=0, blank=True)
@@ -105,7 +104,7 @@ class karel_equip(models.Model):
     equip_BONUS_XP_procenta = models.FloatField(default=0, blank=True)
     equip_BONUS_spanek_flat = models.FloatField(default=0, blank=True)
     equip_BONUS_spanek_procenta = models.FloatField(default=0, blank=True)
-    equip_BONUS_cena_procenta = models.FloatField(default=0, blank=True)
+    equip_BONUS_cena_procenta = models.FloatField(default=0, blank=True, max_length=100)
 
     def __str__(self):
         return f'Den č: {self.den}: {self.equip_boty}, {self.equip_ponozky}, {self.equip_kalhoty}, {self.equip_triko}, {self.equip_doplnek}, {self.equip_batoh}, {self.equip_spacak}, {self.equip_karimatka}'
@@ -133,7 +132,6 @@ class karel_equip(models.Model):
         ]
 
         for item in vybava_list:
-            if item:
                 celkova_zatez += item.item_vaha
                 celkovy_objem += item.item_objem
                 cena += item.item_cena
@@ -149,6 +147,7 @@ class karel_equip(models.Model):
                 BONUS_spanek_flat += item.item_bonus_spanek_FLAT
                 BONUS_spanek_procenta += item.item_bonus_spanek_procenta
                 BONUS_cena_procenta += item.item_bonus_cena_procenta
+                
 
         self.equip_zatez = celkova_zatez
         self.equip_objem = celkovy_objem
